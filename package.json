@@ -1,0 +1,34 @@
+{
+  "name": "babel-plugin-istanbul",
+  "version": "1.0.0-alpha.1",
+  "author": "Thai Pangsakulyanont @dtinth",
+  "license": "BSD-3-Clause",
+  "description": "A babel plugin that adds istanbul instrumentation to ES6 code — Edit",
+  "main": "lib/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-core": "^6.3.21",
+    "babel-preset-es2015": "^6.3.13"
+  },
+  "scripts": {
+    "release": "babel src --out-dir lib",
+    "test": "echo no tests yet",
+    "prepublish": "npm test && npm run release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/istanbuljs/babel-plugin-istanbul.git"
+  },
+  "keywords": [
+    "istanbul",
+    "babel",
+    "plugin",
+    "instrumentation"
+  ],
+  "bugs": {
+    "url": "https://github.com/istanbuljs/babel-plugin-istanbul/issues"
+  },
+  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme"
+}
