@@ -46,7 +46,7 @@
       "fixtures/should-cover.js"
     ],
     "require": [
-      "babel-register"
+      "babel-core/register"
     ],
     "sourceMap": false,
     "instrument": false
