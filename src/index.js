@@ -1,16 +1,51 @@
-function makeVisitor({types: t}) {
-    return {
-        visitor: {
-            Program: {
-                enter(path, state) {
-                    console.error('NOOP for now');
-                },
-                exit(path, state) {
-                    console.error('NOOP for now');
-                }
-            }
-        }
-    };
+import {realpathSync} from 'fs'
+import {dirname} from 'path'
+import {programVisitor} from 'istanbul-lib-instrument'
+const testExclude = require('test-exclude')
+const findUp = require('find-up')
+
+function getRealpath (n) {
+  try {
+    return realpathSync(n) || n
+  } catch (e) {
+    return n
+  }
 }
 
-export default makeVisitor;
+let exclude
+function shouldSkip (file) {
+  if (!exclude) {
+    exclude = testExclude({
+      configKey: 'nyc',
+      configPath: dirname(findUp.sync('package.json'))
+    })
+  }
+
+  return !exclude.shouldInstrument(file)
+}
+
+function makeVisitor ({types: t}) {
+  return {
+    visitor: {
+      Program: {
+        enter (path) {
+          this.__dv__ = null
+          const realPath = getRealpath(this.file.opts.filename)
+          if (shouldSkip(realPath)) {
+            return
+          }
+          this.__dv__ = programVisitor(t, realPath)
+          this.__dv__.enter(path)
+        },
+        exit (path) {
+          if (!this.__dv__) {
+            return
+          }
+          this.__dv__.exit(path)
+        }
+      }
+    }
+  }
+}
+
+export default makeVisitor
