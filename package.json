@@ -25,7 +25,7 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
-    "pretest": "standard",
+    "pretest": "standard && npm run release",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha test/*.js",
     "prepublish": "npm test && npm run release",
     "version": "standard-version"
