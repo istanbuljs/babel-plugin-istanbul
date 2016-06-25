@@ -68,4 +68,4 @@ You can also use [istanbul's ignore hints](https://github.com/gotwarlost/istanbu
 
 ## Credit where credit is due
 
-The approach used in `babel-plugin-istanbul` was inspired by [Thai Pangsakulyanont](https://github.com/dtinth)'s original library [babel-plugin-__coverage__](https://github.com/dtinth/babel-plugin-__coverage__).
+The approach used in `babel-plugin-istanbul` was inspired by [Thai Pangsakulyanont](https://github.com/dtinth)'s original library [`babel-plugin-__coverage__`](https://github.com/dtinth/babel-plugin-__coverage__).
