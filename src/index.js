@@ -16,6 +16,7 @@ let exclude
 function shouldSkip (file) {
   if (!exclude) {
     exclude = testExclude({
+      cwd: getRealpath(process.cwd()),
       configKey: 'nyc',
       configPath: dirname(findUp.sync('package.json'))
     })
