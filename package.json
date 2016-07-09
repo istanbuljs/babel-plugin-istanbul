@@ -18,7 +18,7 @@
     "coveralls": "^2.11.9",
     "cross-env": "^1.0.8",
     "mocha": "^2.5.3",
-    "nyc": "^6.6.1",
+    "nyc": "^7.0.0",
     "standard": "^7.1.2",
     "standard-version": "^2.3.1"
   },
