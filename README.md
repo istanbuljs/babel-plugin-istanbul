@@ -66,7 +66,25 @@ but you also need to __configure NYC not to instrument your code__ by adding the
 
 ## Ignoring files
 
-You don't want to cover your test files as this will skew your coverage results. You can configure this by configuring the plugin using nyc's [exclude/include syntax](https://github.com/bcoe/nyc#excluding-files).
+You don't want to cover your test files as this will skew your coverage results. You can configure this by providing plugin options matching nyc's [`exclude`/`include` rules](https://github.com/bcoe/nyc#excluding-files):
+
+```js
+{
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          exclude: [
+            "**/*.spec.js"
+          ]
+        }]
+      ]
+    }
+  }
+}
+```
+
+If you don't provide options in your Babel config, the plugin will look for `exclude`/`include` config under an `"nyc"` key in `package.json`.
 
 You can also use [istanbul's ignore hints](https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md#ignoring-code-for-coverage-purposes) to specify specific lines of code to skip instrumenting.
 
