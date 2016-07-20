@@ -5,6 +5,9 @@
   "license": "BSD-3-Clause",
   "description": "A babel plugin that adds istanbul instrumentation to ES6 code",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "find-up": "^1.1.2",
     "istanbul-lib-instrument": "^1.1.0-alpha.2",
