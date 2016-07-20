@@ -13,9 +13,9 @@ function getRealpath (n) {
 }
 
 let exclude
-function shouldSkip (file) {
+function shouldSkip (file, opts) {
   if (!exclude) {
-    exclude = testExclude({
+    exclude = testExclude(Object.keys(opts).length > 0 ? opts : {
       cwd: process.env.NYC_CWD || getRealpath(process.cwd()),
       configKey: 'nyc',
       configPath: dirname(findUp.sync('package.json'))
@@ -32,7 +32,7 @@ function makeVisitor ({types: t}) {
         enter (path) {
           this.__dv__ = null
           const realPath = getRealpath(this.file.opts.filename)
-          if (shouldSkip(realPath)) {
+          if (shouldSkip(realPath, this.opts)) {
             return
           }
           this.__dv__ = programVisitor(t, realPath)
