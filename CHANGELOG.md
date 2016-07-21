@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v1.0.3...v1.1.0) (2016-07-21)
+
+
+### Bug Fixes
+
+* upgrade to istanbul-lib-instrument with faster babel-generator ([#18](https://github.com/istanbuljs/babel-plugin-istanbul/issues/18)) ([d33263c](https://github.com/istanbuljs/babel-plugin-istanbul/commit/d33263c))
+
+
+### Features
+
+* allow exclude/include options to be passed as Babel plugin config ([#16](https://github.com/istanbuljs/babel-plugin-istanbul/issues/16)) ([cf68421](https://github.com/istanbuljs/babel-plugin-istanbul/commit/cf68421))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v1.0.2...v1.0.3) (2016-07-09)
 
