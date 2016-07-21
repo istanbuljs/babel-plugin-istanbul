@@ -68,13 +68,13 @@ but you also need to __configure NYC not to instrument your code__ by adding the
 
 You don't want to cover your test files as this will skew your coverage results. You can configure this by providing plugin options matching nyc's [`exclude`/`include` rules](https://github.com/bcoe/nyc#excluding-files):
 
-```js
+```json
 {
   "env": {
     "test": {
       "plugins": [
         ["istanbul", {
-          exclude: [
+          "exclude": [
             "**/*.spec.js"
           ]
         }]
