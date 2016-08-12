@@ -11,7 +11,7 @@
   "dependencies": {
     "find-up": "^1.1.2",
     "istanbul-lib-instrument": "^1.1.0-alpha.4",
-    "test-exclude": "^1.1.0"
+    "test-exclude": "^2.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.3.17",
