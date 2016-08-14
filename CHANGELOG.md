@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v1.1.0...v2.0.0) (2016-08-14)
+
+
+### Chores
+
+* upgrade to version of test-exclude with new exclude rules ([#35](https://github.com/istanbuljs/babel-plugin-istanbul/issues/35)) ([220ce2b](https://github.com/istanbuljs/babel-plugin-istanbul/commit/220ce2b))
+
+
+### BREAKING CHANGES
+
+* see https://github.com/istanbuljs/test-exclude/blob/master/CHANGELOG.md#breaking-changes
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v1.0.3...v1.1.0) (2016-07-21)
 
