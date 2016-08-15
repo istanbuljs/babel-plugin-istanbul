@@ -16,7 +16,7 @@ let exclude
 function shouldSkip (file, opts) {
   if (!exclude) {
     exclude = testExclude(Object.keys(opts).length > 0 ? opts : {
-      cwd: process.env.NYC_CWD || getRealpath(process.cwd()),
+      cwd: getRealpath(process.env.NYC_CWD || process.cwd()),
       configKey: 'nyc',
       configPath: dirname(findUp.sync('package.json'))
     })
