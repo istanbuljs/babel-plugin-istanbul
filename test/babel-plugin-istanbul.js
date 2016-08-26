@@ -1,4 +1,4 @@
-/* global context, describe, it */
+/* eslint-env mocha */
 
 const babel = require('babel-core')
 import makeVisitor from '../src'
