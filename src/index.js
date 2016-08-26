@@ -15,11 +15,14 @@ function getRealpath (n) {
 let exclude
 function shouldSkip (file, opts) {
   if (!exclude) {
-    exclude = testExclude(Object.keys(opts).length > 0 ? opts : {
-      cwd: getRealpath(process.env.NYC_CWD || process.cwd()),
-      configKey: 'nyc',
-      configPath: dirname(findUp.sync('package.json'))
-    })
+    const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
+    exclude = testExclude(Object.assign(
+      { cwd },
+      Object.keys(opts).length > 0 ? opts : {
+        configKey: 'nyc',
+        configPath: dirname(findUp.sync('package.json', { cwd }))
+      }
+    ))
   }
 
   return !exclude.shouldInstrument(file)
