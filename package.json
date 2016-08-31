@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "find-up": "^1.1.2",
-    "istanbul-lib-instrument": "^1.1.0-alpha.4",
+    "istanbul-lib-instrument": "^1.1.1",
     "test-exclude": "^2.1.1"
   },
   "devDependencies": {
