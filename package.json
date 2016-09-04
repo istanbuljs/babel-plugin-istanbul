@@ -57,5 +57,8 @@
   "bugs": {
     "url": "https://github.com/istanbuljs/babel-plugin-istanbul/issues"
   },
-  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme"
+  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme",
+  "engines": {
+    "node": ">=4"
+  }
 }

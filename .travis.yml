@@ -6,6 +6,5 @@ os:
 after_success: npm run coverage
 
 node_js:
-  - "0.10"
   - "4"
   - "node"
