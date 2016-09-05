@@ -1,6 +1,7 @@
 import {realpathSync} from 'fs'
 import {dirname} from 'path'
 import {programVisitor} from 'istanbul-lib-instrument'
+import assign from 'lodash.assign'
 
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
@@ -18,7 +19,7 @@ function makeShouldSkip () {
   return function shouldSkip (file, opts) {
     if (!exclude) {
       const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
-      exclude = testExclude(Object.assign(
+      exclude = testExclude(assign(
         { cwd },
         Object.keys(opts).length > 0 ? opts : {
           configKey: 'nyc',

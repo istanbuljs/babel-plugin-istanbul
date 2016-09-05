@@ -11,6 +11,7 @@
   "dependencies": {
     "find-up": "^1.1.2",
     "istanbul-lib-instrument": "^1.1.1",
+    "lodash.assign": "^4.2.0",
     "test-exclude": "^2.1.1"
   },
   "devDependencies": {
