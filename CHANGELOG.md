@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v2.0.1...v2.0.2) (2016-09-08)
+
+
+### Bug Fixes
+
+* take realpath of cwd, whether or not set in env ([#37](https://github.com/istanbuljs/babel-plugin-istanbul/issues/37)) ([6274d83](https://github.com/istanbuljs/babel-plugin-istanbul/commit/6274d83))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v2.0.0...v2.0.1) (2016-09-02)
 
