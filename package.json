@@ -11,6 +11,7 @@
   "dependencies": {
     "find-up": "^1.1.2",
     "istanbul-lib-instrument": "^1.1.1",
+    "lodash.assign": "^4.2.0",
     "test-exclude": "^2.1.1"
   },
   "devDependencies": {
@@ -21,7 +22,9 @@
     "coveralls": "^2.11.9",
     "cross-env": "^2.0.0",
     "mocha": "^3.0.2",
+    "mock-fs": "^3.11.0",
     "nyc": "^8.1.0",
+    "pmock": "^0.2.3",
     "standard": "^8.0.0",
     "standard-version": "^2.3.1"
   },

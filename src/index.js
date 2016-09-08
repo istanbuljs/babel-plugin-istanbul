@@ -1,6 +1,8 @@
 import {realpathSync} from 'fs'
 import {dirname} from 'path'
 import {programVisitor} from 'istanbul-lib-instrument'
+import assign from 'lodash.assign'
+
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
 
@@ -12,20 +14,26 @@ function getRealpath (n) {
   }
 }
 
-let exclude
-function shouldSkip (file, opts) {
-  if (!exclude) {
-    exclude = testExclude(Object.keys(opts).length > 0 ? opts : {
-      cwd: process.env.NYC_CWD || getRealpath(process.cwd()),
-      configKey: 'nyc',
-      configPath: dirname(findUp.sync('package.json'))
-    })
-  }
+function makeShouldSkip () {
+  let exclude
+  return function shouldSkip (file, opts) {
+    if (!exclude) {
+      const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
+      exclude = testExclude(assign(
+        { cwd },
+        Object.keys(opts).length > 0 ? opts : {
+          configKey: 'nyc',
+          configPath: dirname(findUp.sync('package.json', { cwd }))
+        }
+      ))
+    }
 
-  return !exclude.shouldInstrument(file)
+    return !exclude.shouldInstrument(file)
+  }
 }
 
 function makeVisitor ({types: t}) {
+  const shouldSkip = makeShouldSkip()
   return {
     visitor: {
       Program: {
