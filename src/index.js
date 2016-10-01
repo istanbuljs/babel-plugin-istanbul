@@ -1,7 +1,7 @@
 import {realpathSync} from 'fs'
 import {dirname} from 'path'
 import {programVisitor} from 'istanbul-lib-instrument'
-import assign from 'lodash.assign'
+import assign from 'object-assign'
 
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
