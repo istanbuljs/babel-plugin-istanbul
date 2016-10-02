@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 
 const babel = require('babel-core')
-import mockFs from 'mock-fs'
 import mockProcess from 'pmock'
 import fs from 'fs'
 import makeVisitor from '../src'
@@ -54,76 +53,79 @@ describe('babel-plugin-istanbul', function () {
   })
 
   // Regression tests for https://github.com/istanbuljs/babel-plugin-istanbul/issues/7
-  context('when current path uses a symlink', function () {
-    beforeEach(function () {
-      mockFs({
-        '/project': {
-          'fixtures': {
-            'should-cover.js': fs.readFileSync('./fixtures/should-cover.js')
+  if (!/^v0\.10/.test(process.version)) { // mock-fs does not work on Node 0.10.
+    const mockFs = require('mock-fs')
+    context('when current path uses a symlink', function () {
+      beforeEach(function () {
+        mockFs({
+          '/project': {
+            'fixtures': {
+              'should-cover.js': fs.readFileSync('./fixtures/should-cover.js')
+            },
+            'package.json': fs.readFileSync('./package.json')
           },
-          'package.json': fs.readFileSync('./package.json')
-        },
-        '/symlink': mockFs.symlink({path: '/project'})
-      })
-    })
-
-    const shouldInstrument = file => {
-      var result = babel.transformFileSync(file, {
-        plugins: [
-          makeVisitor({types: babel.types})
-        ]
-      })
-      result.code.should.match(/statementMap/)
-    }
-
-    context('and NYC_CWD is set', function () {
-      var env
-
-      beforeEach(function () {
-        env = mockProcess.env({
-          NYC_CWD: '/symlink'
+          '/symlink': mockFs.symlink({path: '/project'})
         })
       })
 
-      it('should instrument file accessed via link', function () {
-        shouldInstrument('/symlink/fixtures/should-cover.js')
-      })
-
-      it('should instrument file accessed via real path', function () {
-        shouldInstrument('/project/fixtures/should-cover.js')
-      })
-
-      afterEach(function () {
-        env.reset()
-      })
-    })
-
-    context('and only process.cwd() is set', function () {
-      var env, cwd
-
-      beforeEach(function () {
-        env = mockProcess.env({
-          NYC_CWD: ''
+      const shouldInstrument = file => {
+        var result = babel.transformFileSync(file, {
+          plugins: [
+            makeVisitor({types: babel.types})
+          ]
         })
-        cwd = mockProcess.cwd(fs.realpathSync('/symlink')) // realpath because of mock-fs Windows quirk re: process.cwd
+        result.code.should.match(/statementMap/)
+      }
+
+      context('and NYC_CWD is set', function () {
+        var env
+
+        beforeEach(function () {
+          env = mockProcess.env({
+            NYC_CWD: '/symlink'
+          })
+        })
+
+        it('should instrument file accessed via link', function () {
+          shouldInstrument('/symlink/fixtures/should-cover.js')
+        })
+
+        it('should instrument file accessed via real path', function () {
+          shouldInstrument('/project/fixtures/should-cover.js')
+        })
+
+        afterEach(function () {
+          env.reset()
+        })
       })
 
-      it('should instrument file accessed via link', function () {
-        shouldInstrument('/symlink/fixtures/should-cover.js')
-      })
+      context('and only process.cwd() is set', function () {
+        var env, cwd
 
-      it('should instrument file accessed via real path', function () {
-        shouldInstrument('/project/fixtures/should-cover.js')
+        beforeEach(function () {
+          env = mockProcess.env({
+            NYC_CWD: ''
+          })
+          cwd = mockProcess.cwd(fs.realpathSync('/symlink')) // realpath because of mock-fs Windows quirk re: process.cwd
+        })
+
+        it('should instrument file accessed via link', function () {
+          shouldInstrument('/symlink/fixtures/should-cover.js')
+        })
+
+        it('should instrument file accessed via real path', function () {
+          shouldInstrument('/project/fixtures/should-cover.js')
+        })
+
+        afterEach(function () {
+          env.reset()
+          cwd.reset()
+        })
       })
 
       afterEach(function () {
-        env.reset()
-        cwd.reset()
+        mockFs.restore()
       })
     })
-
-    afterEach(function () {
-      mockFs.restore()
-    })
-  })
+  }
 })
