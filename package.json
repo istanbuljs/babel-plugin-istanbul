@@ -63,7 +63,8 @@
   "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme",
   "greenkeeper": {
     "ignore": [
-      "find-up"
+      "find-up",
+      "cross-env"
     ]
   }
 }
