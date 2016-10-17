@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v2.0.2...v2.0.3) (2016-10-17)
+
+
+### Bug Fixes
+
+* force istanbul-lib-instrument with variable hoisting fix ([#64](https://github.com/istanbuljs/babel-plugin-istanbul/issues/64)) ([209a0cf](https://github.com/istanbuljs/babel-plugin-istanbul/commit/209a0cf))
+* switch deprecated lodash.assign for object-assign ([#58](https://github.com/istanbuljs/babel-plugin-istanbul/issues/58)) ([6e051fc](https://github.com/istanbuljs/babel-plugin-istanbul/commit/6e051fc))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v2.0.1...v2.0.2) (2016-09-08)
 
