@@ -32,7 +32,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
     "pretest": "standard && npm run release",
-    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --require=${FS_MOCK:-mock-fs} test/*.js",
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --require=./test/utils/mock-fs test/*.js",
     "prepublish": "npm test && npm run release",
     "version": "standard-version"
   },
