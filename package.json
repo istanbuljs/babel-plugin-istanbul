@@ -23,7 +23,7 @@
     "cross-env": "^2.0.1",
     "mocha": "^3.0.2",
     "mock-fs": "^3.11.0",
-    "nyc": "^8.1.0",
+    "nyc": "^8.3.0",
     "pmock": "^0.2.3",
     "standard": "^8.0.0",
     "standard-version": "^3.0.0"
