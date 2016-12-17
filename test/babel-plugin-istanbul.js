@@ -32,6 +32,43 @@ describe('babel-plugin-istanbul', function () {
     })
   })
 
+  context('source maps', function () {
+    it('should use inline source map', function () {
+      var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/has-inline-source-map.js']
+          }]
+        ]
+      })
+      result.code.should.match(/inputSourceMap/)
+    })
+
+    it('should not use inline source map if inputSourceMap is set to false', function () {
+      var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/has-inline-source-map.js'],
+            useInlineSourceMaps: false
+          }]
+        ]
+      })
+      result.code.should.not.match(/inputSourceMap/)
+    })
+
+    it('should use provided source map', function () {
+      var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/has-inline-source-map.js'],
+            inputSourceMap: { asdfQwer: 'foo' }
+          }]
+        ]
+      })
+      result.code.should.match(/inputSourceMap:\s*{\s*asdfQwer: "foo"\s*}/)
+    })
+  })
+
   context('package.json "nyc" config', function () {
     it('should instrument file if shouldSkip returns false', function () {
       var result = babel.transformFileSync('./fixtures/should-cover.js', {

@@ -36,6 +36,11 @@
     "prepublish": "npm test && npm run release",
     "version": "standard-version"
   },
+  "standard": {
+    "ignore": [
+      "fixtures/has-inline-source-map.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/istanbuljs/babel-plugin-istanbul.git"

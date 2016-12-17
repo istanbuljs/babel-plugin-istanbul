@@ -88,6 +88,40 @@ If you don't provide options in your Babel config, the plugin will look for `exc
 
 You can also use [istanbul's ignore hints](https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md#ignoring-code-for-coverage-purposes) to specify specific lines of code to skip instrumenting.
 
+## Source Maps
+
+By default, this plugin will pick up inline source maps and attach them to the instrumented code such that code coverage can be remapped back to the original source, even for multi-step build processes. This can be memory intensive. Set `useInlineSourceMaps` to prevent this behavior.
+
+```json
+{
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          "useInlineSourceMaps": false
+        }]
+      ]
+    }
+  }
+}
+```
+
+If you're instrumenting code programatically, you can pass a source map explicitly.
+```js
+import babelPluginIstanbul from 'babel-plugin-istanbul';
+
+function instrument(sourceCode, sourceMap, fileName) {
+  return babel.transform(sourceCode, {
+    filename,
+    plugins: [
+      [babelPluginIstanbul, {
+        inputSourceMap: sourceMap
+      }]
+    ]
+  })
+}
+```
+
 ## Credit where credit is due
 
 The approach used in `babel-plugin-istanbul` was inspired by [Thai Pangsakulyanont](https://github.com/dtinth)'s original library [`babel-plugin-__coverage__`](https://github.com/dtinth/babel-plugin-__coverage__).
