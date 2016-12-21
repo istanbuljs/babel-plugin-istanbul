@@ -8,6 +8,18 @@ import makeVisitor from '../src'
 require('chai').should()
 
 describe('babel-plugin-istanbul', function () {
+  it('transforms arrow functions', function () {
+    var result = babel.transformFileSync('./fixtures/should-transform-arrow-function.js', {
+      babelrc: false,
+      plugins: [
+        [makeVisitor({types: babel.types}), {
+          include: ['fixtures/should-transform-arrow-function.js']
+        }]
+      ]
+    })
+    result.code.should.not.contain('() => {')
+  })
+
   context('Babel plugin config', function () {
     it('should instrument file if shouldSkip returns false', function () {
       var result = babel.transformFileSync('./fixtures/plugin-should-cover.js', {

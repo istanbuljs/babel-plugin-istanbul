@@ -2,6 +2,7 @@ import {realpathSync} from 'fs'
 import {dirname} from 'path'
 import {programVisitor} from 'istanbul-lib-instrument'
 import assign from 'object-assign'
+import transformArrowFunctions from 'babel-plugin-transform-es2015-arrow-functions'
 
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
@@ -32,10 +33,12 @@ function makeShouldSkip () {
   }
 }
 
-function makeVisitor ({types: t}) {
+function makeVisitor (props) {
   const shouldSkip = makeShouldSkip()
+  const { visitor: { ArrowFunctionExpression } } = transformArrowFunctions(props)
   return {
     visitor: {
+      ArrowFunctionExpression,
       Program: {
         enter (path) {
           this.__dv__ = null
@@ -43,7 +46,7 @@ function makeVisitor ({types: t}) {
           if (shouldSkip(realPath, this.opts)) {
             return
           }
-          this.__dv__ = programVisitor(t, realPath)
+          this.__dv__ = programVisitor(props.types, realPath)
           this.__dv__.enter(path)
         },
         exit (path) {
