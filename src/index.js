@@ -43,7 +43,14 @@ function makeVisitor ({types: t}) {
           if (shouldSkip(realPath, this.opts)) {
             return
           }
-          this.__dv__ = programVisitor(t, realPath)
+          let { inputSourceMap } = this.opts
+          if (this.opts.useInlineSourceMaps !== false) {
+            inputSourceMap = inputSourceMap || this.file.opts.inputSourceMap
+          }
+          this.__dv__ = programVisitor(t, realPath, {
+            coverageVariable: '__coverage__',
+            inputSourceMap
+          })
           this.__dv__.enter(path)
         },
         exit (path) {
