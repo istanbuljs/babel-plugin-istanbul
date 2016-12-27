@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v3.0.0...v3.1.0) (2016-12-27)
+
+
+### Bug Fixes
+
+* upgrade a bunch of core dependencies ([#77](https://github.com/istanbuljs/babel-plugin-istanbul/issues/77)) ([e764330](https://github.com/istanbuljs/babel-plugin-istanbul/commit/e764330))
+
+
+### Features
+
+* accept source map input for the visitor ([#75](https://github.com/istanbuljs/babel-plugin-istanbul/issues/75)) ([437e90b](https://github.com/istanbuljs/babel-plugin-istanbul/commit/437e90b))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v2.0.3...v3.0.0) (2016-11-14)
 
