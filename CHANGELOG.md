@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.2"></a>
+## [3.1.2](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v3.1.1...v3.1.2) (2017-01-04)
+
+
+### Bug Fixes
+
+* address regression related to export const foo = () => {} ([#79](https://github.com/istanbuljs/babel-plugin-istanbul/issues/79)) ([f870a8f](https://github.com/istanbuljs/babel-plugin-istanbul/commit/f870a8f))
+
+
+
 <a name="3.1.1"></a>
 ## [3.1.1](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v3.1.0...v3.1.1) (2017-01-02)
 
