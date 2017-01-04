@@ -165,4 +165,20 @@ describe('babel-plugin-istanbul', function () {
       })
     })
   }
+
+  // TODO: setup istanbul-lib-instrument, such that we can
+  // run various babel configurations.
+  context('regression tests', () => {
+    // regression test for https://github.com/istanbuljs/babel-plugin-istanbul/issues/78
+    it('should instrument: export const foo = () => {}', function () {
+      var result = babel.transformFileSync('./fixtures/issue-78.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/issue-78.js']
+          }]
+        ]
+      })
+      result.code.match(/statementMap/)
+    })
+  })
 })

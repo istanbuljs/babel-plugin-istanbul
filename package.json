@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "find-up": "^1.1.2",
-    "istanbul-lib-instrument": "^1.4.0",
+    "istanbul-lib-instrument": "^1.4.1",
     "object-assign": "^4.1.0",
     "test-exclude": "^3.3.0"
   },
