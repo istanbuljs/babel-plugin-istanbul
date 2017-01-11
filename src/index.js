@@ -57,7 +57,11 @@ function makeVisitor ({types: t}) {
           if (!this.__dv__) {
             return
           }
-          this.__dv__.exit(path)
+          let result = this.__dv__.exit(path)
+          if (this.opts.includeUntested) {
+            global.__coverage__ = global.__coverage__ || {}
+            global.__coverage__[getRealpath(this.file.opts.filename)] = result.fileCoverage
+          }
         }
       }
     }

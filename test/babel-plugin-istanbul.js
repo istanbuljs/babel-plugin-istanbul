@@ -4,8 +4,9 @@ const babel = require('babel-core')
 import mockProcess from 'pmock'
 import fs from 'fs'
 import makeVisitor from '../src'
+import path from 'path'
 
-require('chai').should()
+var should = require('chai').should()
 
 describe('babel-plugin-istanbul', function () {
   context('Babel plugin config', function () {
@@ -29,6 +30,36 @@ describe('babel-plugin-istanbul', function () {
         ]
       })
       result.code.should.not.match(/statementMap/)
+    })
+
+    it('should expose fileCoverage in global scope when includeUntested is set to true', function () {
+      var __coverage__ = global.__coverage__
+      delete global.__coverage__
+      babel.transformFileSync('./fixtures/plugin-should-cover.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            includeUntested: true,
+            include: ['fixtures/plugin-should-cover.js']
+          }]
+        ]
+      })
+      should.exist(global.__coverage__)
+      should.exist(global.__coverage__[path.resolve('./fixtures/plugin-should-cover.js')])
+      global.__coverage__ = __coverage__
+    })
+
+    it('should not expose fileCoverage in global scope when includeUntested is not set', function () {
+      var __coverage__ = global.__coverage__
+      delete global.__coverage__
+      babel.transformFileSync('./fixtures/plugin-should-cover.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/plugin-should-cover.js']
+          }]
+        ]
+      })
+      should.not.exist(global.__coverage__)
+      global.__coverage__ = __coverage__
     })
   })
 
