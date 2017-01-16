@@ -18,12 +18,30 @@ function makeShouldSkip () {
   return function shouldSkip (file, opts) {
     if (!exclude) {
       const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
-      exclude = testExclude(Object.assign(
-        { cwd },
-        Object.keys(opts).length > 0 ? opts : {
+      const nycConfig = process.env.NYC_CONFIG ? JSON.parse(process.env.NYC_CONFIG) : {}
+
+      let config = {}
+      if (Object.keys(opts).length > 0) {
+        // explicitly configuring options in babel
+        // takes precendence.
+        config = opts
+      } else if (nycConfig.include || nycConfig.exclude) {
+        // nyc was configured in a parent process (keep these settings).
+        config = {
+          include: nycConfig.include,
+          exclude: nycConfig.exclude
+        }
+      } else {
+        // fallback to loading config from key in package.json.
+        config = {
           configKey: 'nyc',
           configPath: dirname(findUp.sync('package.json', { cwd }))
         }
+      }
+
+      exclude = testExclude(Object.assign(
+        { cwd },
+        config
       ))
     }
 
