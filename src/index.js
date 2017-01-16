@@ -19,11 +19,11 @@ function makeShouldSkip () {
   return function shouldSkip (file, opts) {
     if (!exclude) {
       const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
-      const include = process.env.NYC_CONFIG ? JSON.parse(process.env.NYC_CONFIG).include : false
+      const defaults = process.env.NYC_CONFIG ? JSON.parse(process.env.NYC_CONFIG) : {}
       exclude = testExclude(assign(
         { cwd },
         Object.keys(opts).length > 0 ? opts : {
-          include: include,
+          include: defaults.include,
           configKey: 'nyc',
           configPath: dirname(findUp.sync('package.json', { cwd }))
         }
