@@ -7,4 +7,5 @@ after_success: npm run coverage
 
 node_js:
   - "4"
-  - "node"
+  - "6"
+  - "stable"
