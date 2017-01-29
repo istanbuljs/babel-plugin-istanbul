@@ -8,12 +8,3 @@ after_success: npm run coverage
 node_js:
   - "4"
   - "node"
-
-# mock-fs breaks the test-suite in Node 0.10,
-# we circument this by skipping mock-fs related
-# tests. This hack is also required which prevents
-# mocha from loading mock-fs in files it instruments.
-matrix:
-    include:
-     - node_js: "0.10"
-       env: FS_MOCK=./package.json

@@ -9,10 +9,10 @@
     "lib"
   ],
   "dependencies": {
-    "find-up": "^1.1.2",
+    "find-up": "^2.1.0",
     "istanbul-lib-instrument": "^1.4.2",
     "object-assign": "^4.1.0",
-    "test-exclude": "^3.3.0"
+    "test-exclude": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -20,9 +20,8 @@
     "babel-preset-es2015": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
-    "cross-env": "^2.0.1",
+    "cross-env": "^3.1.4",
     "mocha": "^3.2.0",
-    "mock-fs": "^3.12.1",
     "nyc": "^10.0.0",
     "pmock": "^0.2.3",
     "standard": "^8.6.0",
@@ -32,7 +31,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
     "pretest": "standard && npm run release",
-    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --require=${FS_MOCK:-mock-fs} test/*.js",
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha test/*.js",
     "prepublish": "npm test && npm run release",
     "version": "standard-version"
   },
