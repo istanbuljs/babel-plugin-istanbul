@@ -68,22 +68,52 @@ describe('babel-plugin-istanbul', function () {
   })
 
   context('package.json "nyc" config', function () {
-    it('should instrument file if shouldSkip returns false', function () {
-      var result = babel.transformFileSync('./fixtures/should-cover.js', {
-        plugins: [
-          makeVisitor({types: babel.types})
-        ]
+    context('process.env.NYC_CONFIG is set', function () {
+      it('should instrument file if shouldSkip returns false', function () {
+        var result = babel.transformFileSync('./fixtures/should-cover.js', {
+          plugins: [
+            makeVisitor({types: babel.types})
+          ]
+        })
+        result.code.should.match(/statementMap/)
       })
-      result.code.should.match(/statementMap/)
+
+      it('should not instrument file if shouldSkip returns true', function () {
+        var result = babel.transformFileSync('./fixtures/should-not-cover.js', {
+          plugins: [
+            makeVisitor({types: babel.types})
+          ]
+        })
+        result.code.should.not.match(/statementMap/)
+      })
     })
 
-    it('should not instrument file if shouldSkip returns true', function () {
-      var result = babel.transformFileSync('./fixtures/should-not-cover.js', {
-        plugins: [
-          makeVisitor({types: babel.types})
-        ]
+    context('process.env.NYC_CONFIG is not set', function () {
+      const OLD_NYC_CONFIG = process.env.NYC_CONFIG
+      before(() => {
+        delete process.env.NYC_CONFIG
       })
-      result.code.should.not.match(/statementMap/)
+      after(() => {
+        process.env.NYC_CONFIG = OLD_NYC_CONFIG
+      })
+
+      it('should instrument file if shouldSkip returns false', function () {
+        var result = babel.transformFileSync('./fixtures/should-cover.js', {
+          plugins: [
+            makeVisitor({types: babel.types})
+          ]
+        })
+        result.code.should.match(/statementMap/)
+      })
+
+      it('should not instrument file if shouldSkip returns true', function () {
+        var result = babel.transformFileSync('./fixtures/should-not-cover.js', {
+          plugins: [
+            makeVisitor({types: babel.types})
+          ]
+        })
+        result.code.should.not.match(/statementMap/)
+      })
     })
   })
 
