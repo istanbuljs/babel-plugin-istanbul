@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v3.1.2...v4.0.0) (2017-02-07)
+
+
+### Bug Fixes
+
+* load configuration from process.env.NYC_CONFIG if present ([#93](https://github.com/istanbuljs/babel-plugin-istanbul/issues/93)) ([e902924](https://github.com/istanbuljs/babel-plugin-istanbul/commit/e902924))
+
+
+### Features
+
+* drop Node 0.10 and 0.12 support, upgrade dependencies to reflect this ([#88](https://github.com/istanbuljs/babel-plugin-istanbul/issues/88)) ([594c03a](https://github.com/istanbuljs/babel-plugin-istanbul/commit/594c03a))
+* we can now use the language feature Object.assign ([#92](https://github.com/istanbuljs/babel-plugin-istanbul/issues/92)) ([f77db2a](https://github.com/istanbuljs/babel-plugin-istanbul/commit/f77db2a))
+
+
+### BREAKING CHANGES
+
+* I've updated dependencies and dropped Node 0.10 and Node 0.12 support.
+
+
+
 <a name="3.1.2"></a>
 ## [3.1.2](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v3.1.1...v3.1.2) (2017-01-04)
 
