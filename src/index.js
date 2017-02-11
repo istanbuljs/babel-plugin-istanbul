@@ -58,9 +58,8 @@ function makeVisitor ({types: t}) {
             return
           }
           let result = this.__dv__.exit(path)
-          if (this.opts.includeUntested) {
-            global.__coverage__ = global.__coverage__ || {}
-            global.__coverage__[getRealpath(this.file.opts.filename)] = result.fileCoverage
+          if (this.opts.onCover) {
+            this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage)
           }
         }
       }
