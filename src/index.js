@@ -57,7 +57,7 @@ function makeVisitor ({types: t}) {
           if (!this.__dv__) {
             return
           }
-          let result = this.__dv__.exit(path)
+          const result = this.__dv__.exit(path)
           if (this.opts.onCover) {
             this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage)
           }
