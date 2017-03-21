@@ -2,6 +2,7 @@
 
 const babel = require('babel-core')
 import makeVisitor from '../src'
+import path from 'path'
 
 require('chai').should()
 
@@ -27,6 +28,22 @@ describe('babel-plugin-istanbul', function () {
         ]
       })
       result.code.should.not.match(/statementMap/)
+    })
+
+    it('should call onCover callback', function () {
+      var args
+      babel.transformFileSync('./fixtures/plugin-should-cover.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            onCover: function () {
+              args = [].slice.call(arguments)
+            },
+            include: ['fixtures/plugin-should-cover.js']
+          }]
+        ]
+      })
+      args[0].should.equal(path.resolve('./fixtures/plugin-should-cover.js'))
+      args[1].statementMap.should.exist
     })
   })
 
