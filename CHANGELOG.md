@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v4.0.0...v4.1.0) (2017-03-21)
+
+
+### Features
+
+* add includeUntested option to expose coverage of all instrumented files ([#80](https://github.com/istanbuljs/babel-plugin-istanbul/issues/80)) ([b078bbd](https://github.com/istanbuljs/babel-plugin-istanbul/commit/b078bbd))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v3.1.2...v4.0.0) (2017-02-07)
 
