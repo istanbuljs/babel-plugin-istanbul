@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v4.1.0...v4.1.1) (2017-03-22)
+
+
+### Bug Fixes
+
+* explicit upgrade to patched version of istanbul-lib-instrument ([db8ecbe](https://github.com/istanbuljs/babel-plugin-istanbul/commit/db8ecbe))
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v4.0.0...v4.1.0) (2017-03-21)
 
