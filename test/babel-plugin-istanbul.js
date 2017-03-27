@@ -43,7 +43,7 @@ describe('babel-plugin-istanbul', function () {
         ]
       })
       args[0].should.equal(path.resolve('./fixtures/plugin-should-cover.js'))
-      args[1].statementMap.should.exist
+      args[1].statementMap.should.exist // eslint-disable-line
     })
   })
 
