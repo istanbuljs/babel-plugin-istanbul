@@ -3,7 +3,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/istanbuljs/babel-plugin-istanbul.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/istanbuljs/babel-plugin-istanbul.svg?branch=master)](https://travis-ci.org/istanbuljs/babel-plugin-istanbul)
 [![Coverage Status](https://coveralls.io/repos/github/istanbuljs/babel-plugin-istanbul/badge.svg?branch=master)](https://coveralls.io/github/istanbuljs/babel-plugin-istanbul?branch=master)
-[![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 A Babel plugin that instruments your code with Istanbul coverage.
 It can instantly be used with [karma-coverage](https://github.com/karma-runner/karma-coverage) and mocha on Node.js (through [nyc](https://github.com/bcoe/nyc)).
