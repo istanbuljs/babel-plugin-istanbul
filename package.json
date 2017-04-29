@@ -10,8 +10,8 @@
   ],
   "dependencies": {
     "find-up": "^2.1.0",
-    "istanbul-lib-instrument": "^1.7.0",
-    "test-exclude": "^4.0.3"
+    "istanbul-lib-instrument": "^1.7.1",
+    "test-exclude": "^4.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
