@@ -4,6 +4,9 @@
 [![Build Status](https://travis-ci.org/istanbuljs/babel-plugin-istanbul.svg?branch=master)](https://travis-ci.org/istanbuljs/babel-plugin-istanbul)
 [![Coverage Status](https://coveralls.io/repos/github/istanbuljs/babel-plugin-istanbul/badge.svg?branch=master)](https://coveralls.io/github/istanbuljs/babel-plugin-istanbul?branch=master)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![community slack](http://devtoolscommunity.herokuapp.com/badge.svg)](http://devtoolscommunity.herokuapp.com)
+
+_Having problems? want to contribute? join our [community slack](http://devtoolscommunity.herokuapp.com)_.
 
 A Babel plugin that instruments your code with Istanbul coverage.
 It can instantly be used with [karma-coverage](https://github.com/karma-runner/karma-coverage) and mocha on Node.js (through [nyc](https://github.com/bcoe/nyc)).
