@@ -1,6 +1,7 @@
 import {realpathSync} from 'fs'
 import {dirname} from 'path'
 import {programVisitor} from 'istanbul-lib-instrument'
+import babelSyntaxObjectRestSpread from 'babel-plugin-syntax-object-rest-spread'
 
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
@@ -23,7 +24,7 @@ function makeShouldSkip () {
       let config = {}
       if (Object.keys(opts).length > 0) {
         // explicitly configuring options in babel
-        // takes precendence.
+        // takes precedence.
         config = opts
       } else if (nycConfig.include || nycConfig.exclude) {
         // nyc was configured in a parent process (keep these settings).
@@ -52,6 +53,7 @@ function makeShouldSkip () {
 function makeVisitor ({types: t}) {
   const shouldSkip = makeShouldSkip()
   return {
+    inherits: babelSyntaxObjectRestSpread,
     visitor: {
       Program: {
         enter (path) {
