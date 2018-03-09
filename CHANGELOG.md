@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.6"></a>
+## <small>4.1.6 (2018-03-09)</small>
+
+* chore: explicit update of istanbul dependencies (#149) ([77b6eb7](https://github.com/istanbuljs/babel-plugin-istanbul/commit/77b6eb7)), closes [#149](https://github.com/istanbuljs/babel-plugin-istanbul/issues/149)
+* chore(package): update coveralls to version 3.0.0 (#133) ([7045a03](https://github.com/istanbuljs/babel-plugin-istanbul/commit/7045a03)), closes [#133](https://github.com/istanbuljs/babel-plugin-istanbul/issues/133)
+* chore(package): update mocha to version 4.0.0 (#134) ([38176ba](https://github.com/istanbuljs/babel-plugin-istanbul/commit/38176ba)), closes [#134](https://github.com/istanbuljs/babel-plugin-istanbul/issues/134)
+* fix: babel-preset-es2015 => babel-preset-env (#138) ([18fe954](https://github.com/istanbuljs/babel-plugin-istanbul/commit/18fe954)), closes [#138](https://github.com/istanbuljs/babel-plugin-istanbul/issues/138)
+* fix: include object-spread-syntax plugin (#141) ([428a952](https://github.com/istanbuljs/babel-plugin-istanbul/commit/428a952)), closes [#141](https://github.com/istanbuljs/babel-plugin-istanbul/issues/141)
+
+
+
 <a name="4.1.5"></a>
 ## [4.1.5](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v4.1.2...v4.1.5) (2017-08-23)
 
