@@ -87,3 +87,4 @@ function makeVisitor ({types: t}) {
 }
 
 export default makeVisitor
+module.exports = exports['default']
