@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 
-const babel = require('babel-core')
+import * as babel from '@babel/core'
 import makeVisitor from '../src'
 import path from 'path'
 
