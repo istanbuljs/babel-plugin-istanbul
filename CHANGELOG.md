@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v4.1.6...v5.0.0) (2018-06-27)
+
+
+### Features
+
+* upgrade to babel 7 and newest istanbul libraries ([#158](https://github.com/istanbuljs/babel-plugin-istanbul/issues/158)) ([a9e1564](https://github.com/istanbuljs/babel-plugin-istanbul/commit/a9e1564))
+
+
+### BREAKING CHANGES
+
+* Drop node 4 support, upgrade to babel 7, stop shipping @babel/plugin-syntax-object-rest-spread
+
+
+
 <a name="4.1.6"></a>
 ## <small>4.1.6 (2018-03-09)</small>
 
