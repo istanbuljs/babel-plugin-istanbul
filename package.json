@@ -9,24 +9,23 @@
     "lib"
   ],
   "dependencies": {
-    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
-    "find-up": "^2.1.0",
-    "istanbul-lib-instrument": "^1.10.1",
-    "test-exclude": "^4.2.1"
+    "find-up": "^3.0.0",
+    "istanbul-lib-instrument": "^2.2.0",
+    "test-exclude": "^4.2.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.24.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.24.0",
-    "chai": "^4.1.0",
-    "coveralls": "^3.0.0",
-    "cross-env": "^3.1.4",
-    "mocha": "^4.0.0",
-    "nyc": "^11.1.0",
+    "@babel/cli": "7.0.0-beta.51",
+    "@babel/core": "7.0.0-beta.51",
+    "@babel/preset-env": "7.0.0-beta.51",
+    "@babel/register": "7.0.0-beta.51",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.1",
+    "cross-env": "^5.1.6",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
     "pmock": "^0.2.3",
-    "standard": "^9.0.2",
-    "standard-version": "^4.0.0"
+    "standard": "^11.0.1",
+    "standard-version": "^4.4.0"
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -57,7 +56,7 @@
       "fixtures/should-cover.js"
     ],
     "require": [
-      "babel-register"
+      "@babel/register"
     ],
     "sourceMap": false,
     "instrument": false
@@ -65,11 +64,5 @@
   "bugs": {
     "url": "https://github.com/istanbuljs/babel-plugin-istanbul/issues"
   },
-  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme",
-  "greenkeeper": {
-    "ignore": [
-      "find-up",
-      "cross-env"
-    ]
-  }
+  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme"
 }

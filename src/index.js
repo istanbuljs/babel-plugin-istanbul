@@ -1,7 +1,6 @@
 import {realpathSync} from 'fs'
 import {dirname} from 'path'
 import {programVisitor} from 'istanbul-lib-instrument'
-import babelSyntaxObjectRestSpread from 'babel-plugin-syntax-object-rest-spread'
 
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
@@ -53,7 +52,6 @@ function makeShouldSkip () {
 function makeVisitor ({types: t}) {
   const shouldSkip = makeShouldSkip()
   return {
-    inherits: babelSyntaxObjectRestSpread,
     visitor: {
       Program: {
         enter (path) {
@@ -64,7 +62,9 @@ function makeVisitor ({types: t}) {
           }
           let { inputSourceMap } = this.opts
           if (this.opts.useInlineSourceMaps !== false) {
-            inputSourceMap = inputSourceMap || this.file.opts.inputSourceMap
+            if (!inputSourceMap && this.file.inputMap) {
+              inputSourceMap = this.file.inputMap.sourcemap
+            }
           }
           this.__dv__ = programVisitor(t, realPath, {
             coverageVariable: '__coverage__',
