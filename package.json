@@ -11,7 +11,7 @@
   "dependencies": {
     "find-up": "^3.0.0",
     "istanbul-lib-instrument": "^2.2.0",
-    "test-exclude": "^4.2.2"
+    "test-exclude": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.51",
@@ -22,7 +22,7 @@
     "coveralls": "^3.0.1",
     "cross-env": "^5.1.6",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2",
+    "nyc": "^13.0.0",
     "pmock": "^0.2.3",
     "standard": "^11.0.1",
     "standard-version": "^4.4.0"
@@ -64,5 +64,8 @@
   "bugs": {
     "url": "https://github.com/istanbuljs/babel-plugin-istanbul/issues"
   },
-  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme"
+  "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme",
+  "engines": {
+    "node": ">=6"
+  }
 }
