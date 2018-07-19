@@ -45,6 +45,30 @@ describe('babel-plugin-istanbul', function () {
       args[0].should.equal(path.resolve('./fixtures/plugin-should-cover.js'))
       args[1].statementMap.should.exist // eslint-disable-line
     })
+
+    it('should set a default coverageVariable', function () {
+      var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/has-inline-source-map.js']
+          }]
+        ]
+      })
+      result.code.should.match(/__coverage__/)
+    })
+
+    it('should set a custom coverageVariable', function () {
+      var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            include: ['fixtures/has-inline-source-map.js'],
+            coverageVariable: '__fooBar__'
+          }]
+        ]
+      })
+      result.code.should.not.match(/__coverage__/)
+      result.code.should.match(/__fooBar__/)
+    })
   })
 
   context('source maps', function () {
