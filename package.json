@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-istanbul",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "Thai Pangsakulyanont @dtinth",
   "license": "BSD-3-Clause",
   "description": "A babel plugin that adds istanbul instrumentation to ES6 code",
