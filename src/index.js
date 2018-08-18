@@ -16,7 +16,7 @@ function getRealpath (n) {
 function makeShouldSkip () {
   let exclude
   return function shouldSkip (file, opts) {
-    if (!exclude) {
+    if (!exclude || exclude.cwd !== opts.cwd) {
       const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
       const nycConfig = process.env.NYC_CONFIG ? JSON.parse(process.env.NYC_CONFIG) : {}
 
@@ -44,7 +44,6 @@ function makeShouldSkip () {
         config
       ))
     }
-
     return !exclude.shouldInstrument(file)
   }
 }

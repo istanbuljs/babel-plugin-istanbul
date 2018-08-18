@@ -148,5 +148,25 @@ describe('babel-plugin-istanbul', function () {
       })
       result.code.match(/statementMap/)
     })
+
+    it('should respect a changed cwd in options', function () {
+      var resultBefore = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            cwd: '/Users/juretriglav/src/babel-plugin-istanbul/fixtures'
+          }]
+        ]
+      })
+      resultBefore.code.should.match(/statementMap/)
+
+      var resultAfter = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
+        plugins: [
+          [makeVisitor({types: babel.types}), {
+            cwd: '/Users/juretriglav/src/babel-plugin-istanbul/lib'
+          }]
+        ]
+      })
+      resultAfter.code.should.not.match(/statementMap/)
+    })
   })
 })
