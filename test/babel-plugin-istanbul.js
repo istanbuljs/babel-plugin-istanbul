@@ -153,16 +153,15 @@ describe('babel-plugin-istanbul', function () {
       var resultBefore = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
         plugins: [
           [makeVisitor({types: babel.types}), {
-            cwd: '/Users/juretriglav/src/babel-plugin-istanbul/fixtures'
+            cwd: path.resolve(__dirname, '..', 'fixtures')
           }]
         ]
       })
       resultBefore.code.should.match(/statementMap/)
-
       var resultAfter = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
         plugins: [
           [makeVisitor({types: babel.types}), {
-            cwd: '/Users/juretriglav/src/babel-plugin-istanbul/lib'
+            cwd: path.resolve(__dirname, '..', 'lib')
           }]
         ]
       })
