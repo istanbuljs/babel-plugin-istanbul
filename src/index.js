@@ -29,7 +29,9 @@ function makeShouldSkip () {
         // nyc was configured in a parent process (keep these settings).
         config = {
           include: nycConfig.include,
-          exclude: nycConfig.exclude
+          exclude: nycConfig.exclude,
+          // Make sure this is true unless explicitly set to `false`. `undefined` is still `true`.
+          excludeNodeModules: nycConfig.excludeNodeModules !== false
         }
       } else {
         // fallback to loading config from key in package.json.

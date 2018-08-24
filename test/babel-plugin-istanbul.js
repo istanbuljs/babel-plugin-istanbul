@@ -30,6 +30,32 @@ describe('babel-plugin-istanbul', function () {
       result.code.should.not.match(/statementMap/)
     })
 
+    context('local node_modules', function () {
+      it('should instrument file if shouldSkip returns false', function () {
+        var result = babel.transformFileSync('./fixtures/node_modules/should-cover.js', {
+          plugins: [
+            [makeVisitor({ types: babel.types }), {
+              excludeNodeModules: false,
+              exclude: ['node_modules/**'],
+              include: ['fixtures/node_modules/should-cover.js']
+            }]
+          ]
+        })
+        result.code.should.match(/statementMap/)
+      })
+
+      it('should not instrument file if shouldSkip returns true', function () {
+        var result = babel.transformFileSync('./fixtures/node_modules/should-not-cover.js', {
+          plugins: [
+            [makeVisitor({ types: babel.types }), {
+              include: ['fixtures/node_modules/should-not-cover.js']
+            }]
+          ]
+        })
+        result.code.should.not.match(/statementMap/)
+      })
+    })
+
     it('should call onCover callback', function () {
       var args
       babel.transformFileSync('./fixtures/plugin-should-cover.js', {
