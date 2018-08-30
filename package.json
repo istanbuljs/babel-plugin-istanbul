@@ -24,7 +24,7 @@
     "mocha": "^5.2.0",
     "nyc": "^13.0.0",
     "pmock": "^0.2.3",
-    "standard": "^11.0.1",
+    "standard": "^12.0.1",
     "standard-version": "^4.4.0"
   },
   "scripts": {
