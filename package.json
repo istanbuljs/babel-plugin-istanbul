@@ -10,19 +10,19 @@
   ],
   "dependencies": {
     "find-up": "^3.0.0",
-    "istanbul-lib-instrument": "^2.2.0",
+    "istanbul-lib-instrument": "^3.0.0",
     "test-exclude": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.51",
-    "@babel/core": "7.0.0-beta.51",
-    "@babel/preset-env": "7.0.0-beta.51",
-    "@babel/register": "7.0.0-beta.51",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "chai": "^4.1.2",
     "coveralls": "^3.0.1",
     "cross-env": "^5.1.6",
     "mocha": "^5.2.0",
-    "nyc": "^13.0.0",
+    "nyc": "^13.1.0",
     "pmock": "^0.2.3",
     "standard": "^11.0.1",
     "standard-version": "^4.4.0"
