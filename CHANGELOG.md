@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.0.1...v5.1.0) (2018-09-07)
+
+
+### Features
+
+* Bump dependencies. ([b509649](https://github.com/istanbuljs/babel-plugin-istanbul/commit/b509649))
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.0.0...v5.0.1) (2018-07-24)
 
