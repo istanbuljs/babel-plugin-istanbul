@@ -148,5 +148,27 @@ describe('babel-plugin-istanbul', function () {
       })
       result.code.match(/statementMap/)
     })
+
+    it('should respect a changed cwd in options', function () {
+      const opts = {
+        cwd: path.resolve(__dirname, '..', 'lib')
+      }
+      const plugins = [
+        [makeVisitor, opts]
+      ]
+
+      var resultBefore = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
+        plugins
+      })
+
+      resultBefore.code.should.not.match(/statementMap/)
+
+      opts.cwd = path.resolve(__dirname, '..', 'fixtures')
+
+      var resultAfter = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
+        plugins
+      })
+      resultAfter.code.should.match(/statementMap/)
+    })
   })
 })
