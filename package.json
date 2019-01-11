@@ -14,17 +14,17 @@
     "test-exclude": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
     "@babel/register": "^7.0.0",
-    "chai": "^4.1.2",
-    "coveralls": "^3.0.1",
-    "cross-env": "^5.1.6",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "pmock": "^0.2.3",
-    "standard": "^11.0.1",
+    "standard": "^12.0.1",
     "standard-version": "^4.4.0"
   },
   "scripts": {

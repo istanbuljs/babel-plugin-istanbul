@@ -11,7 +11,7 @@ describe('babel-plugin-istanbul', function () {
     it('should instrument file if shouldSkip returns false', function () {
       var result = babel.transformFileSync('./fixtures/plugin-should-cover.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             include: ['fixtures/plugin-should-cover.js']
           }]
         ]
@@ -22,7 +22,7 @@ describe('babel-plugin-istanbul', function () {
     it('should not instrument file if shouldSkip returns true', function () {
       var result = babel.transformFileSync('./fixtures/plugin-should-not-cover.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             include: ['fixtures/plugin-should-cover.js']
           }]
         ]
@@ -34,7 +34,7 @@ describe('babel-plugin-istanbul', function () {
       var args
       babel.transformFileSync('./fixtures/plugin-should-cover.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             onCover: function () {
               args = [].slice.call(arguments)
             },
@@ -51,7 +51,7 @@ describe('babel-plugin-istanbul', function () {
     it('should use inline source map', function () {
       var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             include: ['fixtures/has-inline-source-map.js']
           }]
         ]
@@ -62,7 +62,7 @@ describe('babel-plugin-istanbul', function () {
     it('should not use inline source map if inputSourceMap is set to false', function () {
       var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             include: ['fixtures/has-inline-source-map.js'],
             useInlineSourceMaps: false
           }]
@@ -74,7 +74,7 @@ describe('babel-plugin-istanbul', function () {
     it('should use provided source map', function () {
       var result = babel.transformFileSync('./fixtures/has-inline-source-map.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             include: ['fixtures/has-inline-source-map.js'],
             inputSourceMap: { asdfQwer: 'foo' }
           }]
@@ -89,7 +89,7 @@ describe('babel-plugin-istanbul', function () {
       it('should instrument file if shouldSkip returns false', function () {
         var result = babel.transformFileSync('./fixtures/should-cover.js', {
           plugins: [
-            makeVisitor({types: babel.types})
+            makeVisitor({ types: babel.types })
           ]
         })
         result.code.should.match(/statementMap/)
@@ -98,7 +98,7 @@ describe('babel-plugin-istanbul', function () {
       it('should not instrument file if shouldSkip returns true', function () {
         var result = babel.transformFileSync('./fixtures/should-not-cover.js', {
           plugins: [
-            makeVisitor({types: babel.types})
+            makeVisitor({ types: babel.types })
           ]
         })
         result.code.should.not.match(/statementMap/)
@@ -117,7 +117,7 @@ describe('babel-plugin-istanbul', function () {
       it('should instrument file if shouldSkip returns false', function () {
         var result = babel.transformFileSync('./fixtures/should-cover.js', {
           plugins: [
-            makeVisitor({types: babel.types})
+            makeVisitor({ types: babel.types })
           ]
         })
         result.code.should.match(/statementMap/)
@@ -126,7 +126,7 @@ describe('babel-plugin-istanbul', function () {
       it('should not instrument file if shouldSkip returns true', function () {
         var result = babel.transformFileSync('./fixtures/should-not-cover.js', {
           plugins: [
-            makeVisitor({types: babel.types})
+            makeVisitor({ types: babel.types })
           ]
         })
         result.code.should.not.match(/statementMap/)
@@ -141,7 +141,7 @@ describe('babel-plugin-istanbul', function () {
     it('should instrument: export const foo = () => {}', function () {
       var result = babel.transformFileSync('./fixtures/issue-78.js', {
         plugins: [
-          [makeVisitor({types: babel.types}), {
+          [makeVisitor({ types: babel.types }), {
             include: ['fixtures/issue-78.js']
           }]
         ]
