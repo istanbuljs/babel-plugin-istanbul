@@ -1,6 +1,6 @@
-import {realpathSync} from 'fs'
-import {dirname} from 'path'
-import {programVisitor} from 'istanbul-lib-instrument'
+import { realpathSync } from 'fs'
+import { dirname } from 'path'
+import { programVisitor } from 'istanbul-lib-instrument'
 
 const testExclude = require('test-exclude')
 const findUp = require('find-up')
@@ -48,7 +48,7 @@ function makeShouldSkip () {
   }
 }
 
-function makeVisitor ({types: t}) {
+function makeVisitor ({ types: t }) {
   const shouldSkip = makeShouldSkip()
   return {
     visitor: {
