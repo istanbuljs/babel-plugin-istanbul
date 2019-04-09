@@ -10,23 +10,23 @@
   ],
   "dependencies": {
     "find-up": "^3.0.0",
-    "istanbul-lib-instrument": "^3.1.0",
-    "test-exclude": "^5.1.0"
+    "istanbul-lib-instrument": "^3.2.0",
+    "test-exclude": "^5.2.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/register": "^7.0.0",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
     "babel-plugin-lodash": "^3.3.4",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
-    "mocha": "^6.0.0",
-    "nyc": "^13.3.0",
+    "mocha": "^6.1.2",
+    "nyc": "^14.0.0-rc.1",
     "pmock": "^0.2.3",
     "standard": "^12.0.1",
-    "standard-version": "^5.0.0"
+    "standard-version": "^5.0.2"
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
