@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.3](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.1.2...v5.1.3) (2019-04-23)
+
+
+### Bug Fixes
+
+* Revert [#192](https://github.com/istanbuljs/babel-plugin-istanbul/issues/192) ([201a933](https://github.com/istanbuljs/babel-plugin-istanbul/commit/201a933)) due to regression detailed at [#201](https://github.com/istanbuljs/babel-plugin-istanbul/issues/201)
+
+
+
 ## [5.1.2](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.1.1...v5.1.2) (2019-04-10)
 
 
