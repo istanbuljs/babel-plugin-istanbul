@@ -149,6 +149,20 @@ describe('babel-plugin-istanbul', function () {
       result.code.match(/statementMap/)
     })
 
+    // regression test for https://github.com/istanbuljs/babel-plugin-istanbul/issues/201
+    it('should not conflict with transform-modules-commonjs', function () {
+      var result = babel.transformFileSync('./fixtures/issue-201.js', {
+        plugins: [
+          [makeVisitor({ types: babel.types }), {
+            include: ['fixtures/issue-201.js']
+          }],
+          '@babel/plugin-transform-modules-commonjs'
+        ]
+      })
+      result.code.should.match(/_path.*\.resolve\)\(_path\)/)
+      result.code.should.not.match(/_path\.resolve\)\(_path\)/)
+    })
+
     it('should respect a changed cwd in options', function () {
       const opts = {
         cwd: path.resolve(__dirname, '..', 'lib')
