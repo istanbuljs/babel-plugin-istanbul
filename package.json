@@ -21,8 +21,8 @@
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
-    "mocha": "^6.1.2",
-    "nyc": "^14.0.0-rc.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.0.0",
     "pmock": "^0.2.3",
     "standard": "^12.0.1",
     "standard-version": "^5.0.2"
