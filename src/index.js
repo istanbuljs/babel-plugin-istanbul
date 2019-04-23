@@ -70,9 +70,6 @@ function makeVisitor ({ types: t }) {
             inputSourceMap
           })
           this.__dv__.enter(path)
-          // Istanbul visitor may replace Identifiers and require re-crawling
-          // scope before continuing with other babel plugins.
-          path.scope.crawl()
         },
         exit (path) {
           if (!this.__dv__) {
