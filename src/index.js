@@ -1,5 +1,6 @@
 import { realpathSync } from 'fs'
 import { dirname } from 'path'
+import { declare } from '@babel/helper-plugin-utils'
 import { programVisitor } from 'istanbul-lib-instrument'
 
 const testExclude = require('test-exclude')
@@ -48,7 +49,10 @@ function makeShouldSkip () {
   }
 }
 
-function makeVisitor ({ types: t }) {
+export default declare(api => {
+  api.assertVersion(7)
+
+  const t = api.types
   const shouldSkip = makeShouldSkip()
   return {
     visitor: {
@@ -83,6 +87,4 @@ function makeVisitor ({ types: t }) {
       }
     }
   }
-}
-
-export default makeVisitor
+})
