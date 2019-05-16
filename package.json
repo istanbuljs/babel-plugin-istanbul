@@ -9,6 +9,7 @@
     "lib"
   ],
   "dependencies": {
+    "@babel/helper-plugin-utils": "^7.0.0",
     "find-up": "^3.0.0",
     "istanbul-lib-instrument": "^3.3.0",
     "test-exclude": "^5.2.3"
@@ -17,7 +18,6 @@
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
     "@babel/plugin-transform-modules-commonjs": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
     "@babel/register": "^7.4.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
