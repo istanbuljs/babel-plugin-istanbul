@@ -34,7 +34,7 @@ describe('babel-plugin-istanbul', function () {
       it('should instrument file if shouldSkip returns false', function () {
         var result = babel.transformFileSync('./fixtures/node_modules/should-cover.js', {
           plugins: [
-            [makeVisitor({ types: babel.types }), {
+            [makeVisitor, {
               excludeNodeModules: false,
               exclude: ['node_modules/**'],
               include: ['fixtures/node_modules/should-cover.js']
@@ -47,7 +47,7 @@ describe('babel-plugin-istanbul', function () {
       it('should not instrument file if shouldSkip returns true', function () {
         var result = babel.transformFileSync('./fixtures/node_modules/should-not-cover.js', {
           plugins: [
-            [makeVisitor({ types: babel.types }), {
+            [makeVisitor, {
               include: ['fixtures/node_modules/should-not-cover.js']
             }]
           ]
