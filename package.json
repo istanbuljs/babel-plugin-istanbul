@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "@babel/helper-plugin-utils": "^7.0.0",
-    "find-up": "^3.0.0",
+    "find-up": "^4.1.0",
     "istanbul-lib-instrument": "^3.3.0",
     "test-exclude": "^5.2.3"
   },
