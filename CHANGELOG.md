@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [5.2.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.1.4...v5.2.0) (2019-07-18)
+
+
+### Bug Fixes
+
+* Print explicit error if use with babel 6 is attempted ([#207](https://github.com/istanbuljs/babel-plugin-istanbul/issues/207)) ([a12cf16](https://github.com/istanbuljs/babel-plugin-istanbul/commit/a12cf16))
+
+
+### Features
+
+* Support turning off node_modules default exclude via flag ([#172](https://github.com/istanbuljs/babel-plugin-istanbul/issues/172)) ([a314f06](https://github.com/istanbuljs/babel-plugin-istanbul/commit/a314f06))
+
+
 
 ## [5.1.4](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.1.3...v5.1.4) (2019-04-25)
 
