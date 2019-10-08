@@ -115,8 +115,16 @@ export default declare(api => {
               inputSourceMap = this.file.inputMap.sourcemap
             }
           }
+          const visitorOptions = {}
+          Object.entries(schema.defaults.instrumentVisitor).forEach(([name, defaultValue]) => {
+            if (name in this.nycConfig) {
+              visitorOptions[name] = this.nycConfig[name]
+            } else {
+              visitorOptions[name] = schema.defaults.instrumentVisitor[name]
+            }
+          })
           this.__dv__ = programVisitor(t, realPath, {
-            coverageVariable: '__coverage__',
+            ...visitorOptions,
             inputSourceMap
           })
           this.__dv__.enter(path)
