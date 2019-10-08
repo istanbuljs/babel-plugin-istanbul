@@ -1,52 +1,94 @@
+import path from 'path'
 import { realpathSync } from 'fs'
-import { dirname } from 'path'
+import { execFileSync } from 'child_process'
 import { declare } from '@babel/helper-plugin-utils'
 import { programVisitor } from 'istanbul-lib-instrument'
-
-const testExclude = require('test-exclude')
-const findUp = require('find-up')
+import testExclude from 'test-exclude'
+import schema from '@istanbuljs/schema'
 
 function getRealpath (n) {
   try {
-    return realpathSync(n) || n
+    return realpathSync(n) || /* istanbul ignore next */ n
   } catch (e) {
+    /* istanbul ignore next */
     return n
   }
 }
 
+const memoize = new Map()
+/* istanbul ignore next */
+const memosep = path.sep === '/' ? ':' : ';'
+
+function loadNycConfig (cwd, opts) {
+  let memokey = cwd
+  const args = [
+    path.resolve(__dirname, 'load-nyc-config-sync.js'),
+    cwd
+  ]
+
+  if ('nycrcPath' in opts) {
+    args.push(opts.nycrcPath)
+
+    memokey += memosep + opts.nycrcPath
+  }
+
+  /* execFileSync is expensive, avoid it if possible! */
+  if (memoize.has(memokey)) {
+    return memoize.get(memokey)
+  }
+
+  const result = JSON.parse(execFileSync(process.execPath, args))
+  const error = result['load-nyc-config-sync-error']
+  if (error) {
+    throw new Error(error)
+  }
+
+  const config = {
+    ...schema.defaults.babelPluginIstanbul,
+    cwd,
+    ...result
+  }
+  memoize.set(memokey, config)
+  return config
+}
+
+function findConfig (opts) {
+  const cwd = getRealpath(opts.cwd || process.env.NYC_CWD || /* istanbul ignore next */ process.cwd())
+  const keys = Object.keys(opts)
+  const ignored = Object.keys(opts).filter(s => s === 'nycrcPath' || s === 'cwd')
+  if (keys.length > ignored.length) {
+    // explicitly configuring options in babel
+    // takes precedence.
+    return {
+      ...schema.defaults.babelPluginIstanbul,
+      cwd,
+      ...opts
+    }
+  }
+
+  if (ignored.length === 0 && process.env.NYC_CONFIG) {
+    // defaults were already applied by nyc
+    return JSON.parse(process.env.NYC_CONFIG)
+  }
+
+  return loadNycConfig(cwd, opts)
+}
+
 function makeShouldSkip () {
   let exclude
-  return function shouldSkip (file, opts) {
-    if (!exclude || exclude.cwd !== opts.cwd) {
-      const cwd = getRealpath(process.env.NYC_CWD || process.cwd())
-      const nycConfig = process.env.NYC_CONFIG ? JSON.parse(process.env.NYC_CONFIG) : {}
 
-      let config = {}
-      if (Object.keys(opts).length > 0) {
-        // explicitly configuring options in babel
-        // takes precedence.
-        config = opts
-      } else if (nycConfig.include || nycConfig.exclude) {
-        // nyc was configured in a parent process (keep these settings).
-        config = {
-          include: nycConfig.include,
-          exclude: nycConfig.exclude,
-          // Make sure this is true unless explicitly set to `false`. `undefined` is still `true`.
-          excludeNodeModules: nycConfig.excludeNodeModules !== false
-        }
-      } else {
-        // fallback to loading config from key in package.json.
-        config = {
-          configKey: 'nyc',
-          configPath: dirname(findUp.sync('package.json', { cwd }))
-        }
-      }
-
-      exclude = testExclude(Object.assign(
-        { cwd },
-        config
-      ))
+  return function shouldSkip (file, nycConfig) {
+    if (!exclude || (exclude.cwd !== nycConfig.cwd)) {
+      exclude = testExclude({
+        cwd: nycConfig.cwd,
+        include: nycConfig.include,
+        exclude: nycConfig.exclude,
+        extension: nycConfig.extension,
+        // Make sure this is true unless explicitly set to `false`. `undefined` is still `true`.
+        excludeNodeModules: nycConfig.excludeNodeModules !== false
+      })
     }
+
     return !exclude.shouldInstrument(file)
   }
 }
@@ -54,15 +96,17 @@ function makeShouldSkip () {
 export default declare(api => {
   api.assertVersion(7)
 
-  const t = api.types
   const shouldSkip = makeShouldSkip()
+
+  const t = api.types
   return {
     visitor: {
       Program: {
         enter (path) {
           this.__dv__ = null
+          this.nycConfig = findConfig(this.opts)
           const realPath = getRealpath(this.file.opts.filename)
-          if (shouldSkip(realPath, this.opts)) {
+          if (shouldSkip(realPath, this.nycConfig)) {
             return
           }
           let { inputSourceMap } = this.opts

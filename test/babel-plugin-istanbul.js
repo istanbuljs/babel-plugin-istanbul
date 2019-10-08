@@ -133,11 +133,14 @@ describe('babel-plugin-istanbul', function () {
 
     context('process.env.NYC_CONFIG is not set', function () {
       const OLD_NYC_CONFIG = process.env.NYC_CONFIG
+      const OLD_NYC_CWD = process.env.NYC_CWD
       before(() => {
         delete process.env.NYC_CONFIG
+        delete process.env.NYC_CWD
       })
       after(() => {
         process.env.NYC_CONFIG = OLD_NYC_CONFIG
+        process.env.NYC_CWD = OLD_NYC_CWD
       })
 
       it('should instrument file if shouldSkip returns false', function () {
@@ -156,6 +159,40 @@ describe('babel-plugin-istanbul', function () {
           ]
         })
         result.code.should.not.match(/statementMap/)
+      })
+
+      it('should load config using cwd', function () {
+        const cwd = path.resolve(__dirname, '..', 'fixtures', 'config')
+        function helper (file, match, opts) {
+          const result = babel.transformFileSync(
+            path.resolve(cwd, file),
+            {
+              plugins: [
+                [makeVisitor, { cwd, ...opts }]
+              ]
+            }
+          )
+          if (match) {
+            result.code.should.match(/statementMap/)
+          } else {
+            result.code.should.not.match(/statementMap/)
+          }
+        }
+
+        helper('file1.js', true)
+        helper('file2.js', false)
+        helper('file1.js', false, { nycrcPath: 'nyc-alt.config.js' })
+        helper('file2.js', true, { nycrcPath: 'nyc-alt.config.js' })
+        ;(function () {
+          babel.transformFileSync(
+            path.resolve(cwd, 'file1.js'),
+            {
+              plugins: [
+                [makeVisitor, { cwd, nycrcPath: 'missing-config.js' }]
+              ]
+            }
+          )
+        }).should.throw(/Requested configuration file missing-config.js not found/)
       })
     })
   })
@@ -187,28 +224,6 @@ describe('babel-plugin-istanbul', function () {
       })
       result.code.should.match(/_path.*\.resolve\)\(_path\)/)
       result.code.should.not.match(/_path\.resolve\)\(_path\)/)
-    })
-
-    it('should respect a changed cwd in options', function () {
-      const opts = {
-        cwd: path.resolve(__dirname, '..', 'lib')
-      }
-      const plugins = [
-        [makeVisitor, opts]
-      ]
-
-      var resultBefore = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
-        plugins
-      })
-
-      resultBefore.code.should.not.match(/statementMap/)
-
-      opts.cwd = path.resolve(__dirname, '..', 'fixtures')
-
-      var resultAfter = babel.transformFileSync('./fixtures/should-respect-cwd.js', {
-        plugins
-      })
-      resultAfter.code.should.match(/statementMap/)
     })
   })
 })

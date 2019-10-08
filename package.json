@@ -10,35 +10,36 @@
   ],
   "dependencies": {
     "@babel/helper-plugin-utils": "^7.0.0",
-    "find-up": "^3.0.0",
-    "istanbul-lib-instrument": "^3.3.0",
-    "test-exclude": "^5.2.3"
+    "@istanbuljs/load-nyc-config": "^1.0.0-alpha.1",
+    "@istanbuljs/schema": "^0.1.1",
+    "istanbul-lib-instrument": "^4.0.0-alpha.1",
+    "test-exclude": "^6.0.0-alpha.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
-    "@babel/register": "^7.4.0",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/register": "^7.6.2",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.3",
-    "cross-env": "^5.2.0",
-    "mocha": "^6.1.4",
-    "nyc": "^14.1.0",
+    "coveralls": "^3.0.6",
+    "cross-env": "^6.0.3",
+    "mocha": "^6.2.1",
+    "nyc": "^15.0.0-alpha.0",
     "pmock": "^0.2.3",
-    "standard": "^14.2.0",
+    "standard": "^14.3.1",
     "standard-version": "^7.0.0"
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
     "pretest": "standard && npm run release",
-    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha test/*.js",
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --timeout 5000 test/*.js",
     "prepublish": "npm test && npm run release",
     "version": "standard-version"
   },
   "standard": {
     "ignore": [
-      "fixtures/has-inline-source-map.js"
+      "fixtures/*.js"
     ]
   },
   "repository": {
