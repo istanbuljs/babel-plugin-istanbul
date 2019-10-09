@@ -68,6 +68,6 @@
   },
   "homepage": "https://github.com/istanbuljs/babel-plugin-istanbul#readme",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   }
 }
