@@ -220,6 +220,8 @@ describe('babel-plugin-istanbul', function () {
     })
 
     context('process.env.NYC_CONFIG is not set', function () {
+      this.timeout(10000)
+
       const OLD_NYC_CONFIG = process.env.NYC_CONFIG
       const OLD_NYC_CWD = process.env.NYC_CWD
       before(() => {
