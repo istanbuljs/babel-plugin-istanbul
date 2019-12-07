@@ -3,7 +3,7 @@ import { realpathSync } from 'fs'
 import { execFileSync } from 'child_process'
 import { declare } from '@babel/helper-plugin-utils'
 import { programVisitor } from 'istanbul-lib-instrument'
-import testExclude from 'test-exclude'
+import TestExclude from 'test-exclude'
 import schema from '@istanbuljs/schema'
 
 function getRealpath (n) {
@@ -79,7 +79,7 @@ function makeShouldSkip () {
 
   return function shouldSkip (file, nycConfig) {
     if (!exclude || (exclude.cwd !== nycConfig.cwd)) {
-      exclude = testExclude({
+      exclude = new TestExclude({
         cwd: nycConfig.cwd,
         include: nycConfig.include,
         exclude: nycConfig.exclude,
