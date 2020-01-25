@@ -22,7 +22,7 @@
     "@babel/register": "^7.7.4",
     "chai": "^4.2.0",
     "coveralls": "^3.0.9",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.0",
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
     "pmock": "^0.2.3",
