@@ -13,5 +13,5 @@ async function main () {
 
 main().catch(error => {
   console.log(JSON.stringify({ 'load-nyc-config-sync-error': error.message }))
-  if (isElectron) process.exit(1)
+  process.exit(0)
 })
