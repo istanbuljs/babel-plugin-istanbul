@@ -27,7 +27,7 @@
     "nyc": "^15.0.0",
     "pmock": "^0.2.3",
     "standard": "^14.3.1",
-    "standard-version": "^7.1.0"
+    "standard-version": "^8.0.1"
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
