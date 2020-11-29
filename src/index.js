@@ -1,6 +1,4 @@
-import path from 'path'
 import { realpathSync } from 'fs'
-import { execFileSync } from 'child_process'
 import { declare } from '@babel/helper-plugin-utils'
 import { programVisitor } from 'istanbul-lib-instrument'
 import TestExclude from 'test-exclude'
@@ -15,48 +13,10 @@ function getRealpath (n) {
   }
 }
 
-const memoize = new Map()
-/* istanbul ignore next */
-const memosep = path.sep === '/' ? ':' : ';'
-
-function loadNycConfig (cwd, opts) {
-  let memokey = cwd
-  const args = [
-    path.resolve(__dirname, 'load-nyc-config-sync.js'),
-    cwd
-  ]
-
-  if ('nycrcPath' in opts) {
-    args.push(opts.nycrcPath)
-
-    memokey += memosep + opts.nycrcPath
-  }
-
-  /* execFileSync is expensive, avoid it if possible! */
-  if (memoize.has(memokey)) {
-    return memoize.get(memokey)
-  }
-
-  const result = JSON.parse(execFileSync(process.execPath, args))
-  const error = result['load-nyc-config-sync-error']
-  if (error) {
-    throw new Error(error)
-  }
-
-  const config = {
-    ...schema.defaults.babelPluginIstanbul,
-    cwd,
-    ...result
-  }
-  memoize.set(memokey, config)
-  return config
-}
-
 function findConfig (opts) {
   const cwd = getRealpath(opts.cwd || process.env.NYC_CWD || /* istanbul ignore next */ process.cwd())
   const keys = Object.keys(opts)
-  const ignored = Object.keys(opts).filter(s => s === 'nycrcPath' || s === 'cwd')
-  if (keys.length > ignored.length) {
+  if (keys.length > 0) {
     // explicitly configuring options in babel
     // takes precedence.
     return {
@@ -66,12 +26,15 @@ function findConfig (opts) {
     }
   }
 
-  if (ignored.length === 0 && process.env.NYC_CONFIG) {
+  if (process.env.NYC_CONFIG) {
     // defaults were already applied by nyc
     return JSON.parse(process.env.NYC_CONFIG)
   }
 
-  return loadNycConfig(cwd, opts)
+  return {
+    ...schema.defaults.babelPluginIstanbul,
+    cwd
+  }
 }
 
 function makeShouldSkip () {

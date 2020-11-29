@@ -10,7 +10,6 @@
   ],
   "dependencies": {
     "@babel/helper-plugin-utils": "^7.0.0",
-    "@istanbuljs/load-nyc-config": "^1.0.0",
     "@istanbuljs/schema": "^0.1.2",
     "istanbul-lib-instrument": "^4.0.0",
     "test-exclude": "^6.0.0"

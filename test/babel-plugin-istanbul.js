@@ -254,49 +254,10 @@ describe('babel-plugin-istanbul', function () {
         })
         result.code.should.not.match(/statementMap/)
       })
-
-      it('should load config using cwd', function () {
-        const cwd = path.resolve(__dirname, '..', 'fixtures', 'config')
-        function helper (file, match, opts) {
-          const result = babel.transformFileSync(
-            path.resolve(cwd, file),
-            {
-              babelrc: false,
-              configFile: false,
-              plugins: [
-                [makeVisitor, { cwd, ...opts }]
-              ]
-            }
-          )
-          if (match) {
-            result.code.should.match(/statementMap/)
-          } else {
-            result.code.should.not.match(/statementMap/)
-          }
-        }
-
-        helper('file1.js', true)
-        helper('file2.js', false)
-        helper('file1.js', false, { nycrcPath: 'nyc-alt.config.js' })
-        helper('file2.js', true, { nycrcPath: 'nyc-alt.config.js' })
-        ;(function () {
-          babel.transformFileSync(
-            path.resolve(cwd, 'file1.js'),
-            {
-              babelrc: false,
-              configFile: false,
-              plugins: [
-                [makeVisitor, { cwd, nycrcPath: 'missing-config.js' }]
-              ]
-            }
-          )
-        }).should.throw(/Requested configuration file missing-config.js not found/)
-      })
     })
   })
 
-  // TODO: setup istanbul-lib-instrument, such that we can
-  // run various babel configurations.
+  // TODO: setup such that we can run various babel configurations.
   context('regression tests', () => {
     // regression test for https://github.com/istanbuljs/babel-plugin-istanbul/issues/78
     it('should instrument: export const foo = () => {}', function () {
