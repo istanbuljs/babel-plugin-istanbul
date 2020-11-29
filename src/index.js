@@ -1,8 +1,10 @@
 import { realpathSync } from 'fs'
 import { declare } from '@babel/helper-plugin-utils'
-import { programVisitor } from 'istanbul-lib-instrument'
+import programVisitor from './visitor.js'
 import TestExclude from 'test-exclude'
 import schema from '@istanbuljs/schema'
+
+export { default as readCoverage } from './read-coverage.js'
 
 function getRealpath (n) {
   try {
@@ -57,19 +59,18 @@ function makeShouldSkip () {
 }
 
 export default declare(api => {
-  api.assertVersion(7)
+  api.assertVersion('^7')
 
   const shouldSkip = makeShouldSkip()
 
-  const t = api.types
   return {
     visitor: {
       Program: {
         enter (path) {
           this.__dv__ = null
           this.nycConfig = findConfig(this.opts)
-          const realPath = getRealpath(this.file.opts.filename)
-          if (shouldSkip(realPath, this.nycConfig)) {
+          const realPath = this.file.opts.filename
+          if (!this.opts.disableTestExclude && shouldSkip(realPath, this.nycConfig)) {
             return
           }
           let { inputSourceMap } = this.opts
@@ -86,7 +87,7 @@ export default declare(api => {
               visitorOptions[name] = schema.defaults.instrumentVisitor[name]
             }
           })
-          this.__dv__ = programVisitor(t, realPath, {
+          this.__dv__ = programVisitor(api, realPath, {
             ...visitorOptions,
             inputSourceMap
           })
@@ -98,7 +99,7 @@ export default declare(api => {
           }
           const result = this.__dv__.exit(path)
           if (this.opts.onCover) {
-            this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage)
+            this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage, result.sourceMappingURL)
           }
         }
       }

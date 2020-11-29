@@ -1,2 +1,9 @@
+.travis.yml
+.github
+*.tgz
+.nyc_output/
+coverage/
 src/
-
+fixtures/
+babel.config.js
+**/*test*

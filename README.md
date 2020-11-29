@@ -20,7 +20,7 @@ To integrate with testing tools, please see the [Integrations](#integrations) se
 Install it:
 
 ```
-npm install --save-dev babel-plugin-istanbul
+npm install --save-dev babel-plugin-istanbul @babel/core
 ```
 
 Add it to `.babelrc` in test mode:
@@ -115,7 +115,7 @@ If you're instrumenting code programatically, you can pass a source map explicit
 import babelPluginIstanbul from 'babel-plugin-istanbul';
 
 function instrument(sourceCode, sourceMap, fileName) {
-  return babel.transform(sourceCode, {
+  return babel.transformSync(sourceCode, {
     filename,
     plugins: [
       [babelPluginIstanbul, {
@@ -123,6 +123,27 @@ function instrument(sourceCode, sourceMap, fileName) {
       }]
     ]
   })
+}
+```
+
+You can also retrieve existing coverage data programatically.  This does
+not perform any modifications of the code.
+```js
+import {readCoverage} from 'babel-plugin-istanbul';
+async function readInitialCoverage(sourceCode, fileName) {
+  let coverageData;
+  await babel.transformAsync(sourceCode, {
+    filename,
+    plugins: [
+      [readCoverage, {
+        onComplete(initialCoverage) {
+          coverageData = initialCoverage;
+        }
+      }]
+    ]
+  });
+
+  return coverageData;
 }
 ```
 
