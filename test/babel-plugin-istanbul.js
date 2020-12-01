@@ -237,6 +237,13 @@ t.test('double-instrument', async t => {
   t.equal(code1, code2)
 })
 
+t.test('assignment pattern', async t => {
+  t.match(
+    instrument('({a = 24} = {})'),
+    'cov;cov.s[0]++;({a=(cov.b[0][0]++,24)}={});'
+  )
+})
+
 t.test('logical', async t => {
   const logicalExp = logic => t.match(
     instrument(`const a = b ${logic} 1`),

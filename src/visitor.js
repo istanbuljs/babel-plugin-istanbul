@@ -333,7 +333,6 @@ function coverStatement (path) {
   this.insertStatementCounter(path)
 }
 
-/* istanbul ignore next: no node.js support */
 function coverAssignmentPattern (path) {
   const n = path.node
   const b = this.cov.newBranch('default-arg', n.loc)
@@ -455,8 +454,7 @@ function coverLogicalExpression (path) {
   const leaves = []
   this.findLeaves(path.node, leaves)
   const b = this.cov.newBranch('binary-expr', path.node.loc)
-  for (let i = 0; i < leaves.length; i += 1) {
-    const leaf = leaves[i]
+  for (const leaf of leaves) {
     const hint = this.hintFor(leaf.node)
     if (hint === 'next') {
       continue

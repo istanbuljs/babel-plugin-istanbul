@@ -9,7 +9,7 @@ export { default as readCoverage } from './read-coverage.js'
 function getRealpath (n) {
   try {
     return realpathSync(n) || /* istanbul ignore next */ n
-  } catch (e) {
+  } catch {
     /* istanbul ignore next */
     return n
   }

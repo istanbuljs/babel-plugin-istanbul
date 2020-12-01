@@ -6,16 +6,8 @@ os:
   - linux
 
 node_js:
-  - "node"
+  - "14"
+  - "12"
   - "10"
-  - "8"
-
-matrix:
-  include:
-    - os: windows
-      node_js: "latest"
-  exclude:
-    - os: windows
-      node_js: "node"
 
 after_success: npm run coverage
