@@ -1,7 +1,6 @@
-.travis.yml
+.nycrc
 .github
 *.tgz
-.nyc_output/
 coverage/
 src/
 fixtures/

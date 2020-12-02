@@ -1,10 +1,4 @@
-# babel-plugin-istanbul
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/istanbuljs/babel-plugin-istanbul.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/istanbuljs/babel-plugin-istanbul.svg?branch=master)](https://travis-ci.org/istanbuljs/babel-plugin-istanbul)
-[![Coverage Status](https://coveralls.io/repos/github/istanbuljs/babel-plugin-istanbul/badge.svg?branch=master)](https://coveralls.io/github/istanbuljs/babel-plugin-istanbul?branch=master)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![community slack](http://devtoolscommunity.herokuapp.com/badge.svg)](http://devtoolscommunity.herokuapp.com)
+# babel-plugin-istanbul [![NPM Version][npm-image]][npm-url]
 
 _Having problems? want to contribute? join our [community slack](http://devtoolscommunity.herokuapp.com)_.
 
@@ -156,3 +150,6 @@ The approach used in `babel-plugin-istanbul` was inspired by [Thai Pangsakulyano
 Available as part of the Tidelift Subscription.
 
 The maintainers of `babel-plugin-istanbul` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-babel-plugin-istanbul?utm_source=npm-babel-plugin-istanbul&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+
+[npm-image]: https://img.shields.io/npm/v/babel-plugin-istanbul.svg
+[npm-url]: https://npmjs.org/package/babel-plugin-istanbul

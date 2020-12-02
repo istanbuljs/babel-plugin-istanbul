@@ -1,0 +1,20 @@
+{
+  "temp-dir": "coverage/tmp",
+  "include": [
+    "src/*.js",
+    "fixtures/should-cover.js"
+  ],
+  "require": [
+    "@babel/register"
+  ],
+  "reporter": [
+    "lcov",
+    "text"
+  ],
+  "lines": 100,
+  "functions": 100,
+  "statements": 100,
+  "branches": 100,
+  "sourceMap": false,
+  "instrument": false
+}
