@@ -1,62 +1,24 @@
-import path from 'path'
 import { realpathSync } from 'fs'
-import { execFileSync } from 'child_process'
 import { declare } from '@babel/helper-plugin-utils'
-import { programVisitor } from 'istanbul-lib-instrument'
+import programVisitor from './visitor.js'
 import TestExclude from 'test-exclude'
 import schema from '@istanbuljs/schema'
+
+export { default as readCoverage } from './read-coverage.js'
 
 function getRealpath (n) {
   try {
     return realpathSync(n) || /* istanbul ignore next */ n
-  } catch (e) {
+  } catch {
     /* istanbul ignore next */
     return n
   }
 }
 
-const memoize = new Map()
-/* istanbul ignore next */
-const memosep = path.sep === '/' ? ':' : ';'
-
-function loadNycConfig (cwd, opts) {
-  let memokey = cwd
-  const args = [
-    path.resolve(__dirname, 'load-nyc-config-sync.js'),
-    cwd
-  ]
-
-  if ('nycrcPath' in opts) {
-    args.push(opts.nycrcPath)
-
-    memokey += memosep + opts.nycrcPath
-  }
-
-  /* execFileSync is expensive, avoid it if possible! */
-  if (memoize.has(memokey)) {
-    return memoize.get(memokey)
-  }
-
-  const result = JSON.parse(execFileSync(process.execPath, args))
-  const error = result['load-nyc-config-sync-error']
-  if (error) {
-    throw new Error(error)
-  }
-
-  const config = {
-    ...schema.defaults.babelPluginIstanbul,
-    cwd,
-    ...result
-  }
-  memoize.set(memokey, config)
-  return config
-}
-
 function findConfig (opts) {
   const cwd = getRealpath(opts.cwd || process.env.NYC_CWD || /* istanbul ignore next */ process.cwd())
   const keys = Object.keys(opts)
-  const ignored = Object.keys(opts).filter(s => s === 'nycrcPath' || s === 'cwd')
-  if (keys.length > ignored.length) {
+  if (keys.length > 0) {
     // explicitly configuring options in babel
     // takes precedence.
     return {
@@ -66,12 +28,15 @@ function findConfig (opts) {
     }
   }
 
-  if (ignored.length === 0 && process.env.NYC_CONFIG) {
+  if (process.env.NYC_CONFIG) {
     // defaults were already applied by nyc
     return JSON.parse(process.env.NYC_CONFIG)
   }
 
-  return loadNycConfig(cwd, opts)
+  return {
+    ...schema.defaults.babelPluginIstanbul,
+    cwd
+  }
 }
 
 function makeShouldSkip () {
@@ -94,19 +59,18 @@ function makeShouldSkip () {
 }
 
 export default declare(api => {
-  api.assertVersion(7)
+  api.assertVersion('^7')
 
   const shouldSkip = makeShouldSkip()
 
-  const t = api.types
   return {
     visitor: {
       Program: {
         enter (path) {
           this.__dv__ = null
           this.nycConfig = findConfig(this.opts)
-          const realPath = getRealpath(this.file.opts.filename)
-          if (shouldSkip(realPath, this.nycConfig)) {
+          const realPath = this.file.opts.filename
+          if (!this.opts.disableTestExclude && shouldSkip(realPath, this.nycConfig)) {
             return
           }
           let { inputSourceMap } = this.opts
@@ -123,7 +87,7 @@ export default declare(api => {
               visitorOptions[name] = schema.defaults.instrumentVisitor[name]
             }
           })
-          this.__dv__ = programVisitor(t, realPath, {
+          this.__dv__ = programVisitor(api, realPath, {
             ...visitorOptions,
             inputSourceMap
           })
@@ -135,7 +99,7 @@ export default declare(api => {
           }
           const result = this.__dv__.exit(path)
           if (this.opts.onCover) {
-            this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage)
+            this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage, result.sourceMappingURL)
           }
         }
       }
