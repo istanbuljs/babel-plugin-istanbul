@@ -1,2 +1,8 @@
+.nycrc
+.github
+*.tgz
+coverage/
 src/
-
+fixtures/
+babel.config.js
+**/*test*
