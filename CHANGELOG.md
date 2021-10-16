@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.0.0...v6.1.0) (2021-10-16)
+
+
+### Features
+
+* **instrumenter:** instrumenter with fixes for branchMap instrumentation ([#265](https://www.github.com/istanbuljs/babel-plugin-istanbul/issues/265)) ([1e9ec62](https://www.github.com/istanbuljs/babel-plugin-istanbul/commit/1e9ec62b50c9d2224e7bb0ccb071fd10b80e018f))
+
 ## [6.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v5.2.0...v6.0.0) (2019-12-20)
 
 
