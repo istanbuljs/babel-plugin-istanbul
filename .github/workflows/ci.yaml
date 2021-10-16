@@ -28,4 +28,3 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm test
-  
