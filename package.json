@@ -26,16 +26,14 @@
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
     "pmock": "^0.2.3",
-    "standard": "^14.3.1",
-    "standard-version": "^7.1.0"
+    "standard": "^14.3.1"
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
     "pretest": "standard && npm run release",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --timeout 5000 test/*.js",
-    "prepublish": "npm test && npm run release",
-    "version": "standard-version"
+    "prepublish": "npm test && npm run release"
   },
   "standard": {
     "ignore": [
