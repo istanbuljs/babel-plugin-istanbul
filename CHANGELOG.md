@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.1](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.1.0...v6.1.1) (2021-10-16)
+
+
+### Bug Fixes
+
+* **build:** first automated publication ([9a1b893](https://www.github.com/istanbuljs/babel-plugin-istanbul/commit/9a1b89342565d1127a011e31262520b057120531))
+
 ## [6.1.0](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.0.0...v6.1.0) (2021-10-16)
 
 
