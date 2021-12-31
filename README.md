@@ -114,7 +114,7 @@ import babelPluginIstanbul from 'babel-plugin-istanbul';
 
 function instrument(sourceCode, sourceMap, fileName) {
   return babel.transform(sourceCode, {
-    filename,
+    fileName,
     plugins: [
       [babelPluginIstanbul, {
         inputSourceMap: sourceMap
