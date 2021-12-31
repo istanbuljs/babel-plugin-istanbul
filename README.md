@@ -112,9 +112,9 @@ If you're instrumenting code programatically, you can pass a source map explicit
 ```js
 import babelPluginIstanbul from 'babel-plugin-istanbul';
 
-function instrument(sourceCode, sourceMap, fileName) {
+function instrument(sourceCode, sourceMap, filename) {
   return babel.transform(sourceCode, {
-    fileName,
+    filename,
     plugins: [
       [babelPluginIstanbul, {
         inputSourceMap: sourceMap
