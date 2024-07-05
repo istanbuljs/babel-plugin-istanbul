@@ -15,6 +15,20 @@ function getRealpath (n) {
   }
 }
 
+function isPlainObject(value) {
+  if (
+    typeof value !== "object" ||
+    Object.prototype.toString.call(value) !== "[object Object]"
+  ) {
+    return false
+  }
+  const proto = Object.getPrototypeOf(value)
+  // Object.prototype's __proto__ is null. Every other class's __proto__.__proto__ is
+  // not null by default. We cannot check if proto === Object.prototype because it
+  // could come from another realm.
+  return proto === null || Object.getPrototypeOf(proto) === null
+}
+
 const memoize = new Map()
 /* istanbul ignore next */
 const memosep = path.sep === '/' ? ':' : ';'
@@ -113,6 +127,9 @@ export default declare(api => {
           if (this.opts.useInlineSourceMaps !== false) {
             if (!inputSourceMap && this.file.inputMap) {
               inputSourceMap = this.file.inputMap.sourcemap
+              if (!isPlainObject(sourceMapFromFile)) {
+                inputSourceMap = {...inputSourceMap};
+              }
             }
           }
           const visitorOptions = {}
