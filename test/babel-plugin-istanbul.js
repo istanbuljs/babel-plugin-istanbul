@@ -327,5 +327,20 @@ describe('babel-plugin-istanbul', function () {
       result.code.should.match(/_path.*\.resolve\)\(_path\)/)
       result.code.should.not.match(/_path\.resolve\)\(_path\)/)
     })
+
+    // regression test for https://github.com/istanbuljs/babel-plugin-istanbul/issues/289
+    it('should instrument: for (let f; ; ) { ...', function () {
+      var result = babel.transformFileSync('./fixtures/issue-289.js', {
+        babelrc: false,
+        configFile: false,
+        plugins: [
+          '@babel/plugin-transform-block-scoping',
+          [makeVisitor, {
+            include: ['fixtures/issue-289.js']
+          }]
+        ]
+      })
+      console.log(result)
+    })
   })
 })

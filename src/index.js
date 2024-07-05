@@ -128,6 +128,7 @@ export default declare(api => {
             inputSourceMap
           })
           this.__dv__.enter(path)
+          path.scope.crawl()
         },
         exit (path) {
           if (!this.__dv__) {
