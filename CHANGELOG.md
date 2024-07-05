@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.2](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.1.1...v6.1.2) (2024-07-05)
+
+
+### Bug Fixes
+
+* container is falsy error with block scoping transform ([#291](https://www.github.com/istanbuljs/babel-plugin-istanbul/issues/291)) ([8e76919](https://www.github.com/istanbuljs/babel-plugin-istanbul/commit/8e7691901986d9aed751ff28724695e0beafb2a8))
+
 ### [6.1.1](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.1.0...v6.1.1) (2021-10-16)
 
 
