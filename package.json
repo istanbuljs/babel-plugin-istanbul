@@ -18,6 +18,7 @@
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.1",
+    "@babel/core-v8": "npm:@babel/core@8.0.0-alpha.11",
     "@babel/plugin-transform-block-scoping": "^7.24.1",
     "@babel/plugin-transform-modules-commonjs": "^7.24.1",
     "@babel/register": "^7.23.7",
