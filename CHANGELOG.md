@@ -2,15 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## Unreleased
-
-### ⚠ BREAKING CHANGES
-
-* Node 18 is now the minimum required version.
-
-### Bug Fixes
-* Update `glob` to version 10, to fix deprecation warning.
-
 ## [7.0.0](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.1.1...v7.0.0) (2024-07-05)
 
 
