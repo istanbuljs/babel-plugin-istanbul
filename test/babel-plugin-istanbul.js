@@ -343,4 +343,90 @@ describe('babel-plugin-istanbul', function () {
       console.log(result)
     })
   })
+
+  context('Skip coverage support', function () {
+    it('should skip files with istanbul ignore file comment', function () {
+      var result = babel.transformFileSync('./fixtures/skip-coverage-test.js', {
+        babelrc: false,
+        configFile: false,
+        plugins: [
+          [
+            makeVisitor,
+            {
+              include: ['fixtures/skip-coverage-test.js']
+            }
+          ]
+        ]
+      })
+      // Should not contain any coverage instrumentation
+      result.code.should.not.match(/statementMap/)
+      result.code.should.not.match(/functionMap/)
+      result.code.should.not.match(/branchMap/)
+    })
+
+    it('should skip files with skip-coverage comment', function () {
+      var result = babel.transformFileSync('./fixtures/skip-coverage-alt.js', {
+        babelrc: false,
+        configFile: false,
+        plugins: [
+          [
+            makeVisitor,
+            {
+              include: ['fixtures/skip-coverage-alt.js']
+            }
+          ]
+        ]
+      })
+      // Should not contain any coverage instrumentation
+      result.code.should.not.match(/statementMap/)
+      result.code.should.not.match(/functionMap/)
+      result.code.should.not.match(/branchMap/)
+    })
+
+    it('should skip files marked programmatically by other plugins', function () {
+      // Create a mock plugin that marks files for skipping
+      const mockSkipPlugin = function () {
+        return {
+          visitor: {
+            Program (path) {
+              // Simulate another plugin marking this file to skip
+              path.node._skipCoverage = true
+              path.node._skipReason = 'marked by test plugin'
+            }
+          }
+        }
+      }
+
+      var result = babel.transformSync(
+        `function shouldNotBeCovered() {
+          console.log('test');
+        }`,
+        {
+          babelrc: false,
+          configFile: false,
+          filename: 'test-programmatic-skip.js',
+          plugins: [mockSkipPlugin, makeVisitor]
+        }
+      )
+      // Should not contain any coverage instrumentation
+      result.code.should.not.match(/statementMap/)
+      result.code.should.not.match(/functionMap/)
+      result.code.should.not.match(/branchMap/)
+    })
+
+    it('should still cover normal files without skip markers', function () {
+      // Use should-cover.js as a known working test since it's already included
+      var result = babel.transformFileSync('./fixtures/should-cover.js', {
+        babelrc: false,
+        configFile: false,
+        plugins: [makeVisitor]
+      })
+
+      // This file should contain coverage instrumentation normally
+      result.code.should.match(/statementMap/)
+
+      // Verify that our shouldSkipCoverage function doesn't interfere with normal instrumentation
+      // The fact that should-cover.js was instrumented proves our function works correctly
+    })
+  })
 })
