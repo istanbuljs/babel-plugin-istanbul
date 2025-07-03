@@ -54,7 +54,10 @@
   "nyc": {
     "include": [
       "src/*.js",
-      "fixtures/should-cover.js"
+      "fixtures/should-cover.js",
+      "fixtures/normal-coverage-test.js",
+      "fixtures/skip-coverage-test.js",
+      "fixtures/skip-coverage-alt.js"
     ],
     "require": [
       "@babel/register"

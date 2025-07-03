@@ -21,10 +21,7 @@ const memosep = path.sep === '/' ? ':' : ';'
 
 function loadNycConfig (cwd, opts) {
   let memokey = cwd
-  const args = [
-    path.resolve(__dirname, 'load-nyc-config-sync.js'),
-    cwd
-  ]
+  const args = [path.resolve(__dirname, 'load-nyc-config-sync.js'), cwd]
 
   if ('nycrcPath' in opts) {
     args.push(opts.nycrcPath)
@@ -53,9 +50,13 @@ function loadNycConfig (cwd, opts) {
 }
 
 function findConfig (opts) {
-  const cwd = getRealpath(opts.cwd || process.env.NYC_CWD || /* istanbul ignore next */ process.cwd())
+  const cwd = getRealpath(
+    opts.cwd || process.env.NYC_CWD || /* istanbul ignore next */ process.cwd()
+  )
   const keys = Object.keys(opts)
-  const ignored = Object.keys(opts).filter(s => s === 'nycrcPath' || s === 'cwd')
+  const ignored = Object.keys(opts).filter(
+    (s) => s === 'nycrcPath' || s === 'cwd'
+  )
   if (keys.length > ignored.length) {
     // explicitly configuring options in babel
     // takes precedence.
@@ -77,8 +78,8 @@ function findConfig (opts) {
 function makeShouldSkip () {
   let exclude
 
-  return function shouldSkip (file, nycConfig) {
-    if (!exclude || (exclude.cwd !== nycConfig.cwd)) {
+  return function shouldSkip (file, nycConfig, programPath = null) {
+    if (!exclude || exclude.cwd !== nycConfig.cwd) {
       exclude = new TestExclude({
         cwd: nycConfig.cwd,
         include: nycConfig.include,
@@ -89,11 +90,37 @@ function makeShouldSkip () {
       })
     }
 
-    return !exclude.shouldInstrument(file)
+    if (!exclude.shouldInstrument(file)) {
+      return { skip: true, reason: 'nyc config exclusion' }
+    }
+
+    // Check for programmatic skip coverage markers and comments if programPath is provided
+    if (programPath) {
+      // Check for programmatic skip coverage markers set by other plugins
+      if (programPath.node._skipCoverage) {
+        const reason =
+          programPath.node._skipReason || 'marked by another plugin'
+        return { skip: true, reason }
+      }
+
+      // Check for file-level ignore comments
+      const comments = programPath.parent.comments || []
+      const hasFileIgnore = comments.some(
+        (comment) =>
+          comment.value.includes('istanbul ignore file') ||
+          comment.value.includes('skip-coverage')
+      )
+
+      if (hasFileIgnore) {
+        return { skip: true, reason: 'ignore comment' }
+      }
+    }
+
+    return { skip: false }
   }
 }
 
-export default declare(api => {
+export default declare((api) => {
   api.assertVersion(7)
 
   const shouldSkip = makeShouldSkip()
@@ -106,7 +133,8 @@ export default declare(api => {
           this.__dv__ = null
           this.nycConfig = findConfig(this.opts)
           const realPath = getRealpath(this.file.opts.filename)
-          if (shouldSkip(realPath, this.nycConfig)) {
+          const skipResult = shouldSkip(realPath, this.nycConfig, path)
+          if (skipResult.skip) {
             return
           }
           let { inputSourceMap } = this.opts
@@ -116,13 +144,15 @@ export default declare(api => {
             }
           }
           const visitorOptions = {}
-          Object.entries(schema.defaults.instrumentVisitor).forEach(([name, defaultValue]) => {
-            if (name in this.nycConfig) {
-              visitorOptions[name] = this.nycConfig[name]
-            } else {
-              visitorOptions[name] = schema.defaults.instrumentVisitor[name]
+          Object.entries(schema.defaults.instrumentVisitor).forEach(
+            ([name, defaultValue]) => {
+              if (name in this.nycConfig) {
+                visitorOptions[name] = this.nycConfig[name]
+              } else {
+                visitorOptions[name] = schema.defaults.instrumentVisitor[name]
+              }
             }
-          })
+          )
           this.__dv__ = programVisitor(t, realPath, {
             ...visitorOptions,
             inputSourceMap
@@ -136,7 +166,10 @@ export default declare(api => {
           }
           const result = this.__dv__.exit(path)
           if (this.opts.onCover) {
-            this.opts.onCover(getRealpath(this.file.opts.filename), result.fileCoverage)
+            this.opts.onCover(
+              getRealpath(this.file.opts.filename),
+              result.fileCoverage
+            )
           }
         }
       }
