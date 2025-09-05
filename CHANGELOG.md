@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v7.0.0...v7.0.1) (2025-09-05)
+
+
+### Bug Fixes
+
+* Add support for Babel 8 ([#304](https://www.github.com/istanbuljs/babel-plugin-istanbul/issues/304)) ([f298957](https://www.github.com/istanbuljs/babel-plugin-istanbul/commit/f298957935b975042d09f86986ad9c4a6a3e529e))
+
 ## [7.0.0](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v6.1.1...v7.0.0) (2024-07-05)
 
 
