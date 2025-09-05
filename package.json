@@ -29,6 +29,7 @@
     "pmock": "^0.2.3",
     "standard": "^14.3.1"
   },
+  "workspaces": ["test/babel-8"],
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
