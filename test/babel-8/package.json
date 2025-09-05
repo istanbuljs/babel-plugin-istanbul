@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^8.0.0-beta.2",
+    "@babel/plugin-transform-block-scoping": "^8.0.0-beta.2",
+    "@babel/plugin-transform-modules-commonjs": "^8.0.0-beta.2"
+  }
+}

@@ -1,12 +1,37 @@
 /* eslint-env mocha */
 
-import * as babel from '@babel/core'
+import * as babel7 from '@babel/core'
 import makeVisitor from '../src'
 import path from 'path'
 
 require('chai').should()
 
+function requireBabel8 (name) {
+  return require(
+    require.resolve(name, {
+      paths: [require.resolve('./babel-8/package.json')]
+    })
+  )
+}
+
 describe('babel-plugin-istanbul', function () {
+  context('with Babel 7', function () {
+    defineTests(babel7, {
+      commonjs: require('@babel/plugin-transform-modules-commonjs'),
+      blockScoping: require('@babel/plugin-transform-block-scoping')
+    })
+  })
+  if (Number.parseInt(process.versions.node, 10) >= 20) {
+    context('with Babel 8', function () {
+      defineTests(requireBabel8('@babel/core'), {
+        commonjs: requireBabel8('@babel/plugin-transform-modules-commonjs'),
+        blockScoping: requireBabel8('@babel/plugin-transform-block-scoping')
+      })
+    })
+  }
+})
+
+function defineTests (babel, babelPlugins) {
   context('Babel plugin config', function () {
     it('should instrument file if shouldSkip returns false', function () {
       var result = babel.transformFileSync('./fixtures/plugin-should-cover.js', {
@@ -321,7 +346,7 @@ describe('babel-plugin-istanbul', function () {
           [makeVisitor, {
             include: ['fixtures/issue-201.js']
           }],
-          '@babel/plugin-transform-modules-commonjs'
+          babelPlugins.commonjs
         ]
       })
       result.code.should.match(/_path.*\.resolve\)\(_path\)/)
@@ -330,17 +355,16 @@ describe('babel-plugin-istanbul', function () {
 
     // regression test for https://github.com/istanbuljs/babel-plugin-istanbul/issues/289
     it('should instrument: for (let f; ; ) { ...', function () {
-      var result = babel.transformFileSync('./fixtures/issue-289.js', {
+      babel.transformFileSync('./fixtures/issue-289.js', {
         babelrc: false,
         configFile: false,
         plugins: [
-          '@babel/plugin-transform-block-scoping',
+          babelPlugins.blockScoping,
           [makeVisitor, {
             include: ['fixtures/issue-289.js']
           }]
         ]
       })
-      console.log(result)
     })
   })
-})
+}
