@@ -27,7 +27,7 @@
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
     "pmock": "^0.2.3",
-    "standard": "^14.3.1"
+    "standard": "^17.1.2"
   },
   "workspaces": [
     "test/babel-8"
