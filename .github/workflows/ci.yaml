@@ -12,18 +12,27 @@ jobs:
       matrix:
         node: [18, 20, 22, 24]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
       - run: node --version
+      # The test/babel-8 workspace depends on Babel 8, which requires Node 20+,
+      # so we cannot install dependencies with --engine-strict. We keep
+      # --engine-strict for older Node.js version, which use a npm version that
+      # does not support nested workspaces so doesn't see the Babel 8 dependencies,
+      # to make sure that we are not accidentally using dependencies that don't
+      # support Node.js 12+.
+      - run: npm install
+        if: matrix.node == 16 || matrix.node == 18
       - run: npm install --engine-strict
+        if: matrix.node != 16 && matrix.node != 18
       - run: npm test
   windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: lts/*
       - run: npm install

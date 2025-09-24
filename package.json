@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-istanbul",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "author": "Thai Pangsakulyanont @dtinth",
   "license": "BSD-3-Clause",
   "description": "A babel plugin that adds istanbul instrumentation to ES6 code",
@@ -29,12 +29,15 @@
     "pmock": "^0.2.3",
     "standard": "^14.3.1"
   },
+  "workspaces": [
+    "test/babel-8"
+  ],
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "babel src --out-dir lib",
     "pretest": "standard && npm run release",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --timeout 5000 test/*.js",
-    "prepublish": "npm test && npm run release"
+    "prepublishOnly": "npm test && npm run release"
   },
   "standard": {
     "ignore": [
