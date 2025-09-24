@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
-      - run: node --version
       # The test/babel-8 workspace depends on Babel 8, which requires Node 20+,
       # so we cannot install dependencies with --engine-strict. We keep
       # --engine-strict for older Node.js version, which use a npm version that
@@ -26,9 +25,10 @@ jobs:
       - run: npm install
         if: matrix.node == 18
       - run: npm install --engine-strict
-      # 14 is an expected job on GitHub, so have a no-op for it
-        if: matrix.node != 14 && matrix.node != 18
+        if: matrix.node >= 20
       - run: npm test
+        # 14 is an expected job on GitHub, so have a no-op for it
+        if: matrix.node != 14
   windows:
     runs-on: windows-latest
     steps:
