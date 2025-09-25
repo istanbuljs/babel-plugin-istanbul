@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.1](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v8.0.0...v8.0.1) (2025-09-25)
+
+
+### Bug Fixes
+
+* **ci:** remove release-please registry url ([#319](https://github.com/istanbuljs/babel-plugin-istanbul/issues/319)) ([478ffb6](https://github.com/istanbuljs/babel-plugin-istanbul/commit/478ffb61ef808686144918b73ee10122d8f6ab0c))
+
 ## [8.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v7.0.1...v8.0.0) (2025-09-25)
 
 
