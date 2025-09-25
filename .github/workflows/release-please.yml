@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: lts/*
-          registry-url: 'https://external-dot-oss-automation.appspot.com/'
         if: ${{ steps.release.outputs.release_created }}
       - run: npm install
         if: ${{ steps.release.outputs.release_created }}
