@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v7.0.1...v8.0.0) (2025-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update to latest version of test-exclude ([#301](https://github.com/istanbuljs/babel-plugin-istanbul/issues/301))
+
+### Features
+
+* **deps:** update to latest version of test-exclude ([#301](https://github.com/istanbuljs/babel-plugin-istanbul/issues/301)) ([fb1d78c](https://github.com/istanbuljs/babel-plugin-istanbul/commit/fb1d78c5c7b494511b0666f1a9ed14d73a57d818))
+
 ### [7.0.1](https://www.github.com/istanbuljs/babel-plugin-istanbul/compare/v7.0.0...v7.0.1) (2025-09-05)
 
 
