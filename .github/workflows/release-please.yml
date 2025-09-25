@@ -7,12 +7,11 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: bcoe/release-please-action@v2
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
-          package-name: yargs
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
