@@ -13,7 +13,7 @@ jobs:
         node: [14, 18, 20, 22, 24]
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
       # The test/babel-8 workspace depends on Babel 8, which requires Node 20+,
@@ -33,7 +33,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
       - run: npm install
