@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.1.0](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v8.0.2...v8.1.0) (2026-04-09)
+
+
+### Features
+
+* **ci/cd:** switch to `npm` trusted publishing ([78d7e8c](https://github.com/istanbuljs/babel-plugin-istanbul/commit/78d7e8c4ccbcee58d606196da665279f699d2241))
+
 ## [8.0.2](https://github.com/istanbuljs/babel-plugin-istanbul/compare/v8.0.1...v8.0.2) (2025-09-25)
 
 
